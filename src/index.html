@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberSYS // Core Recovery Protocol</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+
+:root{
+    --bg:#f0f4f8;
+    --s1:#ffffff;
+    --s2:#f8fafc;
+    --s3:#e8ecf2;
+    --s4:#dde3ea;
+    --b1:#d0d7e0;
+    --b2:#bcc5d0;
+    --cy:#2563eb;
+    --cy2:rgba(37,99,235,.08);
+    --cy3:rgba(37,99,235,.04);
+    --gn:#059669;
+    --gn2:rgba(5,150,105,.08);
+    --rd:#dc2626;
+    --rd2:rgba(220,38,38,.08);
+    --yw:#d97706;
+    --yw2:rgba(217,119,6,.08);
+    --or:#ea580c;
+    --or2:rgba(234,88,12,.08);
+    --pu:#7c3aed;
+    --pu2:rgba(124,58,237,.08);
+    --tx:#1e293b;
+    --brt:#0f172a;
+    --dim:#e2e8f0;
+    --mt:#64748b;
+    --bg2:#eef1f5;
+}
+
+body{
+    background:var(--bg);
+    color:var(--tx);
+    font-family:'Inter',sans-serif;
+    background-image:
+        radial-gradient(ellipse 60% 40% at 50% 0%,rgba(37,99,235,.04),transparent 55%),
+        linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%);
+}
+
+/* scanlines — very subtle */
+body::after{
+    content:'';position:fixed;inset:0;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.008),rgba(0,0,0,.008) 1px,transparent 1px,transparent 3px);
+    pointer-events:none;z-index:9999;
+}
+
+.screen{display:none;position:absolute;inset:0;overflow:hidden}
+.screen.active{display:flex}
+
+/* ═══ BOOT SCREEN ═══ */
+#boot{flex-direction:column;align-items:center;justify-content:center}
+.boot-inner{display:flex;flex-direction:column;align-items:center;gap:24px;max-width:560px;width:90%;padding:24px 0}
+.logo{
+    font-family:'JetBrains Mono',monospace;font-size:clamp(2.4rem,6.5vw,4rem);
+    color:var(--cy);letter-spacing:.15em;
+    text-shadow:0 0 18px rgba(37,99,235,.25),0 0 40px rgba(37,99,235,.1);
+    animation:logoGlow 2.5s ease-in-out infinite alternate;
+}
+@keyframes logoGlow{
+    from{text-shadow:0 0 8px rgba(37,99,235,.15)}
+    to{text-shadow:0 0 28px rgba(37,99,235,.4),0 0 60px rgba(37,99,235,.15)}
+}
+.logo-sub{
+    font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--mt);
+    letter-spacing:.35em;text-transform:uppercase;
+}
+.term{
+    background:var(--s1);border:1px solid var(--b1);border-radius:8px;
+    padding:20px 24px;width:100%;box-shadow:0 2px 12px rgba(0,0,0,.04);
+}
+.tl{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;line-height:2;
+    color:var(--mt);
+}
+.tl.c{color:var(--cy)}
+.tl.w{color:var(--yw)}
+.tl.r{color:var(--rd)}
+.tl.a{color:var(--tx)}
+.cur{
+    display:inline-block;width:7px;height:.85em;background:var(--cy);
+    vertical-align:text-bottom;animation:blink .7s step-end infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.boot-start{
+    background:var(--cy);border:none;color:#fff;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.08em;
+    padding:14px 40px;cursor:pointer;border-radius:8px;
+    transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.25);
+}
+.boot-start:hover{
+    box-shadow:0 6px 22px rgba(37,99,235,.4);
+    transform:translateY(-2px);
+}
+.boot-start:active{transform:translateY(0)}
+
+/* ═══ MAP SCREEN ═══ */
+#map{flex-direction:column;overflow:hidden}
+.map-hud{
+    background:var(--s1);border-bottom:1px solid var(--b1);
+    padding:10px 20px;display:flex;align-items:center;gap:14px;flex-shrink:0;
+    box-shadow:0 1px 4px rgba(0,0,0,.03);
+}
+.map-brand{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cy);
+    letter-spacing:.12em;margin-right:auto;font-weight:600;
+}
+.hchip{
+    background:var(--s2);border:1px solid var(--b1);border-radius:6px;
+    padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;
+}
+.hchip .hv{color:var(--cy);font-size:.82rem;font-weight:700}
+.hchip .hl{color:var(--mt)}
+.rank-c{
+    background:var(--cy2);border:1px solid rgba(37,99,235,.25);border-radius:6px;
+    padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:.6rem;
+    color:var(--cy);font-weight:600;
+}
+
+.map-body{flex:1;overflow-y:auto;padding:24px}
+.map-story{
+    max-width:600px;margin:0 auto 24px;background:var(--s1);
+    border-left:4px solid var(--cy);border-radius:0 8px 8px 0;
+    padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,.03);
+}
+.map-story .ms-title{
+    font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--cy);
+    letter-spacing:.15em;margin-bottom:8px;font-weight:600;
+}
+.map-story p{font-size:.88rem;color:var(--tx);line-height:1.7}
+.map-story .ms-stat{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--yw);
+    margin-top:10px;font-weight:600;
+}
+
+.room-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:14px;max-width:920px;margin:0 auto;
+}
+.room{
+    background:var(--s1);border:1px solid var(--b1);border-radius:10px;
+    padding:18px 20px;cursor:pointer;transition:all .22s;
+    position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.03);
+}
+.room::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    border-radius:3px 3px 0 0;transition:opacity .2s;
+}
+.room:hover{
+    border-color:var(--b2);transform:translateY(-3px);
+    box-shadow:0 6px 20px rgba(0,0,0,.07);
+}
+.room.infected::before{background:var(--rd);opacity:.7}
+.room.infected{border-color:rgba(220,38,38,.2)}
+.room.cleared::before{background:var(--gn);opacity:.7}
+.room.cleared{border-color:rgba(5,150,105,.2)}
+.room-num{
+    font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--mt);
+    letter-spacing:.1em;margin-bottom:6px;
+}
+.room-status{
+    position:absolute;top:10px;right:12px;
+    font-family:'JetBrains Mono',monospace;font-size:.56rem;font-weight:600;
+}
+.room-status.inf{color:var(--rd);animation:infPulse .8s ease infinite alternate}
+@keyframes infPulse{from{opacity:.55}to{opacity:1}}
+.room-status.clr{color:var(--gn)}
+.room-icon{font-size:1.6rem;margin-bottom:6px}
+.room-title{font-size:1.05rem;font-weight:700;color:var(--brt);margin-bottom:3px}
+.room-algo{
+    font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--cy);
+    margin-bottom:6px;font-weight:500;
+}
+.room-threat{font-size:.78rem;color:var(--tx);line-height:1.5}
+.diff-pip{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}
+
+/* ═══ GAME SCREEN ═══ */
+#game{flex-direction:column;overflow:hidden}
+.ghud{
+    background:var(--s1);border-bottom:1px solid var(--b1);
+    height:46px;display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0;
+    box-shadow:0 1px 4px rgba(0,0,0,.03);
+}
+.g-back{
+    background:var(--s2);border:1px solid var(--b1);color:var(--mt);
+    font-family:'Inter',sans-serif;font-weight:600;font-size:.6rem;
+    padding:4px 12px;cursor:pointer;border-radius:6px;transition:all .2s;
+}
+.g-back:hover{border-color:var(--cy);color:var(--cy)}
+.g-title{
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--cy);
+    margin-right:auto;letter-spacing:.08em;font-weight:600;
+}
+.int-wrap{display:flex;align-items:center;gap:6px}
+.int-lbl{font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mt);font-weight:500}
+.int-bar{width:76px;height:5px;background:var(--dim);border-radius:3px;overflow:hidden}
+.int-fill{height:100%;border-radius:3px;transition:width .5s,background .5s}
+.int-val{font-family:'JetBrains Mono',monospace;font-size:.58rem;font-weight:600}
+
+.threat-bar{
+    background:var(--rd2);border-bottom:1px solid rgba(220,38,38,.25);
+    padding:5px 16px;font-family:'JetBrains Mono',monospace;font-size:.6rem;
+    color:var(--rd);display:none;font-weight:600;
+    animation:tba .5s ease infinite alternate;
+}
+@keyframes tba{from{background:rgba(220,38,38,.04)}to{background:rgba(220,38,38,.1)}}
+.threat-bar.on{display:block}
+
+.timer-strip{height:3px;background:var(--dim);flex-shrink:0}
+.timer-fill{height:100%;background:var(--cy);transition:width .1s linear;border-radius:0 2px 2px 0}
+.timer-fill.w{background:var(--yw)}
+.timer-fill.c{background:var(--rd)}
+
+.gbody{display:flex;flex:1;min-height:0;overflow:hidden}
+
+/* SIM */
+.sim{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.sit-bar{
+    background:var(--s2);border-bottom:1px solid var(--b1);
+    padding:10px 18px;flex-shrink:0;
+}
+.sit-tag{
+    font-family:'JetBrains Mono',monospace;font-size:.52rem;color:var(--mt);
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:3px;font-weight:600;
+}
+.sit-msg{font-size:.88rem;color:var(--tx);line-height:1.6}
+.sit-msg .hl{color:var(--cy);font-weight:700}
+.sit-msg .ok{color:var(--gn);font-weight:600}
+.sit-msg .bad{color:var(--rd);font-weight:600}
+.sit-msg .warn{color:var(--yw);font-weight:600}
+
+.arena{
+    flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:16px;padding:16px 24px;overflow:auto;
+}
+
+/* NODES */
+.nrow{display:flex;gap:7px;align-items:center;justify-content:center;flex-wrap:wrap}
+.nd{
+    width:54px;height:54px;border:2px solid var(--b2);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:.9rem;font-weight:700;
+    color:var(--brt);position:relative;transition:all .2s;
+    background:var(--s1);user-select:none;
+}
+.nd .ni{
+    position:absolute;bottom:-17px;font-size:.5rem;color:var(--mt);
+    font-weight:500;
+}
+.nd.drag{cursor:grab}
+.nd.drag:hover{border-color:var(--cy);background:var(--cy2)}
+.nd.dragging{opacity:.35;cursor:grabbing}
+.nd.over{border-color:var(--yw);background:var(--yw2);transform:scale(1.1)}
+.nd.s-a{border-color:var(--cy);background:var(--cy2);box-shadow:0 0 16px rgba(37,99,235,.25);animation:npul .9s ease infinite alternate}
+.nd.s-mid{border-color:var(--yw);background:var(--yw2);box-shadow:0 0 16px rgba(217,119,6,.25);transform:scale(1.08)}
+.nd.s-lo{border-color:var(--gn);background:var(--gn2)}
+.nd.s-hi{border-color:var(--rd);background:var(--rd2)}
+.nd.s-dead{opacity:.18;border-color:var(--dim)}
+.nd.s-found{border-color:var(--gn);background:var(--gn2);box-shadow:0 0 24px rgba(5,150,105,.45);animation:fndp .45s cubic-bezier(.175,.885,.32,1.5)}
+.nd.s-sorted{border-color:rgba(5,150,105,.3);background:rgba(5,150,105,.04)}
+.nd.s-cmp{border-color:var(--yw);background:var(--yw2);animation:npul .4s ease infinite alternate}
+.nd.s-sel{border-color:var(--pu);background:var(--pu2);box-shadow:0 0 16px rgba(124,58,237,.35);transform:scale(1.06)}
+.nd.s-inf{border-color:var(--rd);background:var(--rd2);animation:npul .6s ease infinite alternate}
+.nd.hit{animation:shake .35s ease}
+.nd.pop{animation:fndp .35s ease}
+@keyframes npul{from{box-shadow:0 0 4px currentColor}to{box-shadow:0 0 20px currentColor}}
+@keyframes fndp{0%{transform:scale(.7)}60%{transform:scale(1.3)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* PREDICT */
+.pred-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%;max-width:440px}
+.pred-q{
+    font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--brt);
+    text-align:center;line-height:1.7;font-weight:500;
+}
+.pred-opts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.popt{
+    background:var(--s1);border:2px solid var(--b1);border-radius:8px;
+    padding:9px 18px;cursor:pointer;font-family:'JetBrains Mono',monospace;
+    font-size:.68rem;color:var(--tx);transition:all .18s;font-weight:500;
+}
+.popt:hover{border-color:var(--cy);color:var(--cy)}
+.popt.sel{border-color:var(--cy);background:var(--cy2);color:var(--cy);font-weight:700}
+.popt.ok{border-color:var(--gn)!important;background:var(--gn2)!important;color:var(--gn)!important;font-weight:700}
+.popt.fail{border-color:var(--rd)!important;background:var(--rd2)!important;color:var(--rd)!important}
+
+/* ACTS */
+.acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.act{
+    padding:10px 22px;border:2px solid var(--b1);border-radius:8px;
+    background:var(--s1);color:var(--brt);font-family:'Inter',sans-serif;
+    font-weight:600;font-size:.84rem;cursor:pointer;transition:all .17s;
+}
+.act:hover{transform:translateY(-2px)}
+.act:disabled{opacity:.25;cursor:not-allowed;transform:none!important}
+.act.cy{background:var(--cy);color:#fff;border-color:var(--cy)}
+.act.cy:hover{box-shadow:0 0 20px rgba(37,99,235,.35)}
+.act.gn{background:var(--gn);color:#fff;border-color:var(--gn)}
+.act.gn:hover{box-shadow:0 0 20px rgba(5,150,105,.35)}
+.act.yw{background:var(--yw);color:#fff;border-color:var(--yw)}
+.act.rd{background:var(--rd);color:#fff;border-color:var(--rd)}
+.act.pu{background:var(--pu);color:#fff;border-color:var(--pu)}
+
+/* FB */
+.fb{
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;text-align:center;
+    padding:7px 14px;min-height:28px;opacity:0;transition:opacity .2s;
+    border-radius:6px;font-weight:500;
+}
+.fb.on{opacity:1}
+.fb.ok{background:var(--gn2);color:var(--gn);border:1px solid rgba(5,150,105,.2)}
+.fb.bad{background:var(--rd2);color:var(--rd);border:1px solid rgba(220,38,38,.2)}
+.fb.info{background:var(--cy2);color:var(--cy);border:1px solid rgba(37,99,235,.15)}
+
+/* STATS */
+.stp{
+    width:230px;background:var(--s1);border-left:1px solid var(--b1);
+    display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;
+}
+.sps{padding:12px 14px;border-bottom:1px solid var(--b1)}
+.spt{
+    font-family:'JetBrains Mono',monospace;font-size:.5rem;color:var(--mt);
+    text-transform:uppercase;letter-spacing:.18em;margin-bottom:8px;font-weight:600;
+}
+.op-big{
+    font-family:'JetBrains Mono',monospace;font-size:2.1rem;font-weight:700;
+    color:var(--cy);line-height:1;text-align:center;
+}
+.op-lbl{
+    font-size:.56rem;color:var(--mt);text-align:center;
+    letter-spacing:.08em;text-transform:uppercase;
+}
+.op-fm{
+    font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--yw);
+    text-align:center;margin-top:4px;
+}
+.cxr{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.cxl{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--mt);min-width:60px}
+.cxt{flex:1;height:5px;background:var(--dim);border-radius:3px}
+.cxf{height:100%;border-radius:3px;transition:width .5s}
+.cxv{font-family:'JetBrains Mono',monospace;font-size:.53rem;color:var(--tx);min-width:28px;text-align:right;font-weight:600}
+.log{flex:1;overflow-y:auto;padding:8px 12px}
+.le{
+    font-family:'JetBrains Mono',monospace;font-size:.58rem;line-height:1.55;
+    padding:4px 8px;border-left:2px solid var(--dim);color:var(--mt);
+    margin-bottom:3px;animation:lin .2s ease;border-radius:0 4px 4px 0;
+}
+@keyframes lin{from{opacity:0;transform:translateX(6px)}to{opacity:1}}
+.le.ok{border-left-color:var(--gn);color:var(--tx)}
+.le.key{border-left-color:var(--cy);color:var(--cy)}
+.le.bad{border-left-color:var(--rd);color:var(--rd)}
+.le.warn{border-left-color:var(--yw)}
+
+/* OVERLAY */
+.ov{
+    position:fixed;inset:0;background:rgba(15,23,42,.65);z-index:100;
+    display:none;align-items:center;justify-content:center;
+    backdrop-filter:blur(4px);
+}
+.ov.on{display:flex;animation:ovin .3s ease}
+@keyframes ovin{from{opacity:0}to{opacity:1}}
+.ovb{
+    background:var(--s1);border:1px solid var(--b1);border-radius:14px;
+    padding:32px 38px;max-width:480px;width:90%;text-align:center;
+    box-shadow:0 16px 48px rgba(0,0,0,.12);
+    animation:bpop .4s cubic-bezier(.175,.885,.32,1.5);
+}
+@keyframes bpop{from{opacity:0;transform:scale(.75)}to{opacity:1;transform:scale(1)}}
+.ov-ic{font-size:2.8rem;margin-bottom:10px}
+.ov-t{font-size:1.4rem;font-weight:800;color:var(--brt);margin-bottom:6px}
+.ov-s{font-size:.82rem;color:var(--mt);line-height:1.7;margin-bottom:12px}
+.ov-les{
+    background:var(--s2);border:1px solid var(--b1);border-radius:8px;
+    padding:12px 16px;margin:12px 0;text-align:left;
+    font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--cy);
+    line-height:1.7;
+}
+.ov-lt{
+    color:var(--yw);font-size:.54rem;letter-spacing:.1em;
+    text-transform:uppercase;margin-bottom:5px;font-weight:600;
+}
+.ov-rews{display:flex;gap:10px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.ovr{
+    text-align:center;background:var(--s2);border:1px solid var(--b1);
+    border-radius:8px;padding:8px 16px;
+}
+.ovr .rv{font-family:'JetBrains Mono',monospace;font-size:1.15rem;font-weight:700;color:var(--yw)}
+.ovr .rl{font-size:.52rem;color:var(--mt);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.ov-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.ovbtn{
+    padding:10px 24px;border:none;border-radius:8px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.82rem;
+    cursor:pointer;transition:all .18s;
+}
+.ovbtn.p{background:var(--cy);color:#fff}.ovbtn.p:hover{box-shadow:0 0 20px rgba(37,99,235,.35)}
+.ovbtn.s{background:var(--s2);color:var(--tx);border:1px solid var(--b1)}.ovbtn.s:hover{border-color:var(--cy)}
+
+/* RANKUP */
+.rup{
+    position:fixed;inset:0;background:rgba(15,23,42,.8);z-index:200;
+    display:none;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;backdrop-filter:blur(6px);
+}
+.rup.on{display:flex;animation:ovin .3s ease}
+.ru-e{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--mt);letter-spacing:.25em}
+.ru-n{
+    font-family:'JetBrains Mono',monospace;font-size:clamp(2rem,5.5vw,3.4rem);color:var(--yw);
+    letter-spacing:.18em;font-weight:700;
+    text-shadow:0 0 30px rgba(217,119,6,.5);
+    animation:ypulse 1.5s ease infinite alternate;
+}
+@keyframes ypulse{
+    from{text-shadow:0 0 16px rgba(217,119,6,.35)}
+    to{text-shadow:0 0 50px rgba(217,119,6,.7),0 0 80px rgba(217,119,6,.2)}
+}
+.ru-d{font-size:.88rem;color:var(--tx);margin-bottom:18px}
+.ru-btn{
+    background:var(--yw);color:#fff;border:none;border-radius:8px;
+    font-family:'Inter',sans-serif;font-weight:700;font-size:.72rem;
+    padding:10px 28px;cursor:pointer;letter-spacing:.1em;
+}
+
+/* XP FLOAT */
+.xpf{
+    position:fixed;pointer-events:none;z-index:300;
+    font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;
+    color:var(--cy);text-shadow:0 0 12px rgba(37,99,235,.4);opacity:0;
+}
+.xpf.go{animation:xpup .9s ease forwards}
+@keyframes xpup{
+    0%{opacity:1;transform:translateY(0)}
+    70%{opacity:1;transform:translateY(-50px)}
+    100%{opacity:0;transform:translateY(-85px)}
+}
+
+/* STREAK BADGE */
+.streak-badge{
+    position:fixed;top:56px;right:16px;background:var(--s1);
+    border:2px solid var(--yw);border-radius:8px;
+    padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;
+    color:var(--yw);z-index:50;opacity:0;transition:opacity .3s;
+    pointer-events:none;font-weight:700;box-shadow:0 4px 16px rgba(217,119,6,.15);
+}
+.streak-badge.on{opacity:1}
+
+@media(max-width:700px){
+    .stp{display:none}
+    .room-grid{grid-template-columns:1fr}
+}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="rup" id="rup">
+    <div class="ru-e">// CLEARANCE LEVEL UPGRADED</div>
+    <div class="ru-n" id="ruN">TRAINEE</div>
+    <div class="ru-d" id="ruD"></div>
+    <button class="ru-btn" onclick="closeRup()">ACKNOWLEDGED</button>
+</div>
+
+<div class="streak-badge" id="streakBadge">⚡ EFFICIENCY STREAK x0</div>
+
+<div class="ov" id="ov">
+    <div class="ovb">
+        <div class="ov-ic" id="ovIc"></div>
+        <div class="ov-t" id="ovT"></div>
+        <div class="ov-s" id="ovS"></div>
+        <div class="ov-les"><div class="ov-lt">// Performance Analysis</div><div id="ovL"></div></div>
+        <div class="ov-rews" id="ovR"></div>
+        <div class="ov-btns" id="ovB"></div>
+    </div>
+</div>
+
+<!-- ═══ BOOT ═══ -->
+<div class="screen active" id="boot">
+    <div class="boot-inner">
+        <div class="logo">CyberSYS</div>
+        <div class="logo-sub">// CORE RECOVERY PROTOCOL v4.2</div>
+        <div class="term">
+            <div class="tl r">[CRIT] 9 core modules reporting efficiency failures</div>
+            <div class="tl r">[CRIT] System-wide resource drain detected — cycles wasted</div>
+            <div class="tl">[SYS ] Each module is running at suboptimal performance</div>
+            <div class="tl c">[MOD ] Registry Scan: sequential lookup on massive dataset — excessive time</div>
+            <div class="tl c">[MOD ] Priority Queue: data misordered — downstream corruption risk</div>
+            <div class="tl c">[MOD ] Network Trace: incorrect traversal pattern — cascade failure</div>
+            <div class="tl w">[SYS ] Recovery specialist needed</div>
+            <div class="tl w">[SYS ] Enter each module. Diagnose the bottleneck. Restore optimal flow.</div>
+            <div class="tl a">[SYS ] Awaiting specialist...<span class="cur"></span></div>
+        </div>
+        <button class="boot-start" onclick="goMap()">ACCESS SYSTEM CORE</button>
+    </div>
+</div>
+
+<!-- ═══ MAP ═══ -->
+<div class="screen" id="map">
+    <div class="map-hud">
+        <div class="map-brand">CyberSYS // SYSTEM MAP</div>
+        <div class="hchip"><span class="hv" id="mapScore">0</span> <span class="hl">CREDITS</span></div>
+        <div class="hchip"><span class="hv" id="mapXP">0</span> <span class="hl">REP</span></div>
+        <div class="rank-c" id="mapRank">TRAINEE</div>
+    </div>
+    <div class="map-body">
+        <div class="map-story">
+            <div class="ms-title">// RECOVERY BRIEFING</div>
+            <p id="storyText">Multiple subsystems are hemorrhaging resources — slow scans, scrambled data, broken routing. Each module uses a flawed approach that wastes processing cycles. Your task: enter each module, identify what's wrong, and restore efficiency. Every fix impacts overall system stability.</p>
+            <div class="ms-stat" id="storyStat">MODULES RESTORED: 0/9 · SYSTEM STABILITY: 100%</div>
+        </div>
+        <div class="room-grid" id="roomGrid"></div>
+    </div>
+</div>
+
+<!-- ═══ GAME ═══ -->
+<div class="screen" id="game">
+    <div class="ghud">
+        <button class="g-back" onclick="exitRoom()">◀ DISCONNECT</button>
+        <div class="g-title" id="gTitle">MODULE</div>
+        <div class="int-wrap">
+            <div class="int-lbl">STABILITY</div>
+            <div class="int-bar"><div class="int-fill" id="intF" style="width:100%;background:var(--gn)"></div></div>
+            <div class="int-val" id="intV" style="color:var(--gn)">100%</div>
+        </div>
+        <div class="hchip"><span class="hv" id="gScore">0</span> <span class="hl">CREDITS</span></div>
+        <div class="hchip"><span class="hv" id="gStreak">—</span> <span class="hl">STREAK</span></div>
+    </div>
+    <div class="threat-bar on" id="threatBar">⚠ RESOURCE DRAIN ACTIVE — OPTIMIZE OPERATIONS</div>
+    <div class="timer-strip"><div class="timer-fill" id="timerF" style="width:100%"></div></div>
+
+    <div class="gbody">
+        <div class="sim">
+            <div class="sit-bar">
+                <div class="sit-tag" id="sitTag">SITUATION</div>
+                <div class="sit-msg" id="sitMsg">Loading...</div>
+            </div>
+            <div class="arena" id="arena">
+                <div class="nrow" id="nrow"></div>
+                <div class="acts" id="actsEl"></div>
+                <div class="fb" id="fbEl"></div>
+            </div>
+        </div>
+        <div class="stp">
+            <div class="sps">
+                <div class="spt">Cycle Counter</div>
+                <div class="op-big" id="opN">0</div>
+                <div class="op-lbl">operations</div>
+                <div class="op-fm" id="opFm"></div>
+            </div>
+            <div class="sps">
+                <div class="spt">Efficiency Monitor</div>
+                <div id="cxPanel"></div>
+            </div>
+            <div class="sps" style="flex:1;overflow:hidden;display:flex;flex-direction:column;">
+                <div class="spt">Activity Log</div>
+                <div class="log" id="logEl"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+const G={score:0,xp:0,streak:0,best:0,rank:0,integrity:100,ops:0,cleared:[],cur:null};
+const RANKS=[
+    {xp:0,n:'TRAINEE',d:'Basic system access granted'},
+    {xp:50,n:'TECHNICIAN',d:'Performance analysis tools unlocked'},
+    {xp:120,n:'ENGINEER',d:'Advanced module access authorized'},
+    {xp:250,n:'ARCHITECT',d:'Full system optimization control'},
+    {xp:420,n:'SPECIALIST',d:'You now lead recovery operations'},
+    {xp:600,n:'DIRECTOR',d:'Mastery achieved — you set the standard'},
+];
+
+const ROOMS=[
+    {id:'r1',diff:1,icon:'🔍',title:'Registry Scanner',algo:'Sequential Lookup',bigo:'Full Scan',
+        threat:'Scanning 10,000 records one-by-one — each lookup burns up to 3 seconds. On unsorted registries, every record must be checked until the target is found.',
+        run:roomLinear},
+    {id:'r2',diff:1,icon:'📇',title:'Quick-Find Index',algo:'Jump-to-Middle',bigo:'Halving Method',
+        threat:'Sorted database of 1 million entries: the current routine scans everything instead of jumping to the middle. 1 million checks instead of about 20.',
+        run:roomBinary},
+    {id:'r3',diff:1,icon:'🔄',title:'Priority Reorder',algo:'Pairwise Swap',bigo:'n×n worst',
+        threat:'Priority list scrambled — highest items at the bottom. Reorder by comparing neighbors and swapping when the left is larger than the right.',
+        run:roomBubble},
+    {id:'r4',diff:2,icon:'📊',title:'Performance Profiler',algo:'Cost Estimation',bigo:'Operation counting',
+        threat:'Multiple code fragments need cost estimation. Predict how many operations each will run — understanding which routines drain the most resources.',
+        run:roomClassify},
+    {id:'r5',diff:2,icon:'📡',title:'Stream Buffer',algo:'Slide-to-Position',bigo:'n to n×n',
+        threat:'Live data arriving. The routine\'s cost depends entirely on input order. See how the same code costs next to nothing or burns cycles — depending on what it receives.',
+        run:roomInsertion},
+    {id:'r6',diff:2,icon:'🧬',title:'Data Combiner',algo:'Two-Way Merge',bigo:'n combined',
+        threat:'Two sorted data banks need merging. Always take the smaller head element. One wrong pick corrupts the combined sequence.',
+        run:roomMerge},
+    {id:'r7',diff:3,icon:'⚡',title:'Split Optimizer',algo:'Partition Choice',bigo:'Split quality',
+        threat:'The splitter on sorted data with a bad starting point creates massively uneven halves. Choose the right split point to keep both sides balanced.',
+        run:roomPivot},
+    {id:'r8',diff:3,icon:'🕸️',title:'Containment Protocol',algo:'Level-by-Level',bigo:'nodes+links',
+        threat:'A cascade spreads node-to-node. Visit nodes in correct level order — all immediate connections first, then deeper. Wrong order lets it spread unchecked.',
+        run:roomBFS},
+    {id:'r9',diff:3,icon:'🏁',title:'Efficiency Gauntlet',algo:'Scale Survival',bigo:'All classes',
+        threat:'Final assessment: predict which routines survive at real-world scale. Then watch — see why some approaches fail catastrophically while others barely break a sweat.',
+        run:roomRace},
+];
+
+// ═══════════════════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════════════════
+function goMap(){
+    showScreen('map');
+    buildMap();
+    syncAll();
+}
+function showScreen(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+function buildMap(){
+    const g=document.getElementById('roomGrid');
+    g.innerHTML='';
+    const cleared=G.cleared.length;
+    document.getElementById('storyStat').textContent=`MODULES RESTORED: ${cleared}/9 · SYSTEM STABILITY: ${G.integrity}%`;
+    if(cleared>=3&&cleared<6) document.getElementById('storyText').textContent='Progress: several modules now running efficiently. The remaining ones have subtler bottlenecks — harder to spot. Stay sharp.';
+    else if(cleared>=6) document.getElementById('storyText').textContent='Most systems are stable. Only the trickiest inefficiencies remain. These are the ones that separate good operators from great ones — focus.';
+
+    ROOMS.forEach((r,i)=>{
+        const card=document.createElement('div');
+        const done=G.cleared.includes(r.id);
+        card.className='room '+(done?'cleared':'infected');
+        const diffColor=['','var(--gn)','var(--yw)','var(--rd)'][r.diff]||'var(--mt)';
+        card.innerHTML=`
+            <div class="room-num">MODULE ${String(i+1).padStart(2,'0')}</div>
+            <div class="room-status ${done?'clr':'inf'}">${done?'[RESTORED]':'[DEGRADED]'}</div>
+            <div class="room-icon">${r.icon}</div>
+            <div class="room-title">${r.title}</div>
+            <div class="room-algo">${r.algo} · ${r.bigo}</div>
+            <div class="room-threat">${r.threat}</div>
+            <div style="margin-top:8px;">
+                ${Array(r.diff).fill(0).map(()=>`<span class="diff-pip" style="background:${diffColor}"></span>`).join('')}
+                <span style="font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--mt);font-weight:600;">${['','ROUTINE','MODERATE','CRITICAL'][r.diff]}</span>
+            </div>`;
+        card.onclick=()=>{if(!done)launchRoom(r);};
+        g.appendChild(card);
+    });
+    document.getElementById('mapScore').textContent=G.score.toLocaleString();
+    document.getElementById('mapXP').textContent=G.xp;
+    document.getElementById('mapRank').textContent=RANKS[G.rank].n;
+}
+function launchRoom(r){
+    G.cur=r; G.integrity=100; G.ops=0;
+    showScreen('game');
+    document.getElementById('gTitle').textContent=r.title.toUpperCase()+' // '+r.algo.toUpperCase();
+    clearArena(); syncAll(); r.run();
+}
+function exitRoom(){closeOv();showScreen('map');buildMap();}
+
+// ═══════════════════════════════════════════════
+//  ARENA HELPERS
+// ═══════════════════════════════════════════════
+function clearArena(){
+    document.getElementById('nrow').innerHTML='';
+    document.getElementById('actsEl').innerHTML='';
+    setFb('','');
+    document.getElementById('logEl').innerHTML='';
+    document.getElementById('threatBar').className='threat-bar';
+    setOps(0,''); setCx([]); setSit('',''); setInt(100); stopTimer();
+}
+function setSit(tag,html){document.getElementById('sitTag').textContent=tag;document.getElementById('sitMsg').innerHTML=html;}
+function setInt(pct){
+    G.integrity=pct;
+    const c=pct>60?'var(--gn)':pct>30?'var(--yw)':'var(--rd)';
+    document.getElementById('intF').style.cssText=`width:${pct}%;background:${c}`;
+    document.getElementById('intV').style.color=c;
+    document.getElementById('intV').textContent=pct+'%';
+    const tb=document.getElementById('threatBar');
+    if(pct<=75){tb.className='threat-bar on';tb.textContent=pct<=30?'⚠ CRITICAL — SYSTEM FAILURE IMMINENT':'⚠ RESOURCE DRAIN — INEFFICIENT ROUTINE ACTIVE';}
+    else tb.className='threat-bar';
+}
+function damage(amt,why){
+    G.integrity=Math.max(0,G.integrity-amt);
+    G.streak=0; setInt(G.integrity);
+    log('STABILITY -'+amt+'% | '+why,'bad'); syncAll();
+}
+function setOps(n,fm){G.ops=n;document.getElementById('opN').textContent=n;document.getElementById('opFm').textContent=fm||'';}
+function incOps(fm){G.ops++;document.getElementById('opN').textContent=G.ops;if(fm)document.getElementById('opFm').textContent=fm;}
+function setCx(bars){document.getElementById('cxPanel').innerHTML=bars.map(b=>`<div class="cxr"><div class="cxl">${b.l}</div><div class="cxt"><div class="cxf" style="width:${Math.min(100,b.p)}%;background:${b.c}"></div></div><div class="cxv">${b.v}</div></div>`).join('');}
+function log(msg,cls=''){const w=document.getElementById('logEl');const d=document.createElement('div');d.className='le '+cls;d.textContent=msg;w.prepend(d);if(w.children.length>12)w.removeChild(w.lastChild);}
+function setFb(msg,cls){const f=document.getElementById('fbEl');f.textContent=msg;f.className='fb '+(msg?'on ':'')+cls;if(msg){clearTimeout(window._ft);window._ft=setTimeout(()=>f.classList.remove('on'),2600);}}
+function setActs(btns){const z=document.getElementById('actsEl');z.innerHTML='';btns.forEach(b=>{const el=document.createElement('button');el.className='act '+(b.c||'');el.textContent=b.t;if(b.d)el.disabled=true;el.onclick=b.fn;z.appendChild(el);});}
+function showOv(ic,t,s,les,rews,btns){
+    document.getElementById('ovIc').textContent=ic;
+    document.getElementById('ovT').textContent=t;
+    document.getElementById('ovS').textContent=s;
+    document.getElementById('ovL').textContent=les;
+    document.getElementById('ovR').innerHTML=rews.map(r=>`<div class="ovr"><div class="rv">${r.v}</div><div class="rl">${r.l}</div></div>`).join('');
+    document.getElementById('ovB').innerHTML='';
+    btns.forEach(b=>{const el=document.createElement('button');el.className='ovbtn '+b.c;el.textContent=b.t;el.onclick=b.fn;document.getElementById('ovB').appendChild(el);});
+    document.getElementById('ov').classList.add('on');
+}
+function closeOv(){document.getElementById('ov').classList.remove('on');}
+function award(base,perfect){
+    const e=perfect?base:Math.round(base*.55);
+    const sb=G.streak>=3?Math.round(e*.3):0;
+    const t=e+sb; G.xp+=t; G.score+=t*12; G.streak++; if(G.streak>G.best)G.best=G.streak;
+    spawnXP(t); showStreak(); checkRank(); syncAll();
+    if(!G.cleared.includes(G.cur.id))G.cleared.push(G.cur.id);
+    return t;
+}
+function spawnXP(amt){const e=document.createElement('div');e.className='xpf go';e.textContent='+'+amt+' REP';e.style.cssText=`right:${60+Math.random()*80}px;top:${50+Math.random()*30}px;position:fixed;`;document.body.appendChild(e);setTimeout(()=>e.remove(),1000);}
+function showStreak(){if(G.streak<2)return;const sb=document.getElementById('streakBadge');sb.textContent='⚡ EFFICIENCY STREAK ×'+G.streak;sb.classList.add('on');setTimeout(()=>sb.classList.remove('on'),2000);}
+function checkRank(){for(let i=RANKS.length-1;i>=0;i--){if(G.xp>=RANKS[i].xp&&i>G.rank){G.rank=i;document.getElementById('ruN').textContent=RANKS[i].n;document.getElementById('ruD').textContent=RANKS[i].d;document.getElementById('rup').classList.add('on');break;}}}
+function closeRup(){document.getElementById('rup').classList.remove('on');}
+function syncAll(){
+    document.getElementById('gScore').textContent=G.score.toLocaleString();
+    document.getElementById('gStreak').textContent=G.streak>0?G.streak+'⚡':'—';
+    document.getElementById('mapScore').textContent=G.score.toLocaleString();
+    document.getElementById('mapXP').textContent=G.xp;
+    document.getElementById('mapRank').textContent=RANKS[G.rank].n;
+}
+let _ti=null;
+function startTimer(secs,onDone){stopTimer();const end=Date.now()+secs*1000;const f=document.getElementById('timerF');_ti=setInterval(()=>{const r=Math.max(0,(end-Date.now())/(secs*1000)*100);f.style.width=r+'%';f.className='timer-fill'+(r<30?' c':r<60?' w':'');if(r<=0){stopTimer();onDone&&onDone();}},80);}
+function stopTimer(){clearInterval(_ti);document.getElementById('timerF').style.width='100%';}
+
+let _drag=null;
+function mkDrag(el,idx,onDrop){
+    el.classList.add('drag');el.draggable=true;
+    el.addEventListener('dragstart',()=>{_drag=idx;el.classList.add('dragging');});
+    el.addEventListener('dragend',()=>el.classList.remove('dragging'));
+    el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('over');});
+    el.addEventListener('dragleave',()=>el.classList.remove('over'));
+    el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('over');if(_drag!==null&&_drag!==idx)onDrop(_drag,idx);_drag=null;});
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 1: SEQUENTIAL SCAN — predict then watch
+// ═══════════════════════════════════════════════
+function roomLinear(){
+    const arr=[7,14,3,19,8,25,42,1,33,17,6,29,55,4,38,21];
+    const n=arr.length;
+    const target=arr[3+Math.floor(Math.random()*(n-6))];
+    const realIdx=arr.indexOf(target);
+    const realSteps=realIdx+1;
+    setSit('REGISTRY SCAN // RESOURCE DRAIN',`Record ID <span class="bad">${target}</span> needs to be retrieved. Current routine checks each entry one-by-one. <span class="warn">Predict how many checks</span> before locating the record.`);
+    log('Registry using full sequential scan on unsorted data.','key');
+    log(`Registry size: ${n}. Target ID: ${target}.`);
+    const row=document.getElementById('nrow');row.innerHTML='';
+    arr.forEach((v,i)=>{const nd=document.createElement('div');nd.className='nd';nd.id='ln'+i;nd.innerHTML=v+`<span class="ni">${i}</span>`;row.appendChild(nd);});
+    setCx([{l:'Checked',p:0,c:'var(--cy)',v:'0'},{l:'Remaining',p:100,c:'var(--mt)',v:n},{l:'vs Smart',p:(Math.ceil(Math.log2(n))/n)*100,c:'var(--yw)',v:'≤'+Math.ceil(Math.log2(n))+' steps'}]);
+    const candidates=[1,Math.ceil(n/4),realSteps,Math.ceil(n/2),n].filter((v,i,a)=>a.indexOf(v)===i).sort((a,b)=>a-b).slice(0,5);
+    if(!candidates.includes(realSteps))candidates.push(realSteps);
+    candidates.sort((a,b)=>a-b);
+    const arena=document.getElementById('arena');
+    const pw=document.createElement('div');pw.className='pred-wrap';pw.id='pw1';
+    pw.innerHTML=`<div class="pred-q">⚠ Record ID <strong style="color:var(--cy)">${target}</strong> — needs retrieval.<br>How many entries will be checked before finding it?</div><div class="pred-opts" id="po1"></div>`;
+    arena.appendChild(pw);
+    let chosen=null;
+    const po=document.getElementById('po1');
+    candidates.forEach(o=>{const b=document.createElement('div');b.className='popt';b.textContent=o+' checks';b.onclick=()=>{chosen=o;document.querySelectorAll('#po1 .popt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');setActs([{t:'▶ RUN SCAN',c:'cy',fn:runScan}]);};po.appendChild(b);});
+    setActs([{t:'Select a prediction first',c:'',d:true,fn:()=>{}}]);
+
+    function runScan(){
+        document.getElementById('pw1').style.opacity='.25';setActs([]);let i=0;
+        setSit('REGISTRY SCAN // SCANNING',`Scanning for record <span class="warn">${target}</span>... each check burns cycles. ${n} entries total.`);
+        const iv=setInterval(()=>{
+            if(i>0){const prev=document.getElementById('ln'+(i-1));if(prev)prev.className='nd s-dead';}
+            if(i>=n||arr[i]===target){clearInterval(iv);
+                if(arr[i]===target){
+                    document.getElementById('ln'+i).className='nd s-found';
+                    const correct=chosen===realSteps;
+                    document.querySelectorAll('#po1 .popt').forEach(b=>{const v=parseInt(b.textContent);if(v===realSteps)b.classList.add('ok');else if(v===chosen&&!correct)b.classList.add('fail');});
+                    if(!correct)damage(20,'Prediction inaccurate — re-evaluate scan cost');
+                    setFb(correct?`Exactly right! ${realSteps} checks. Worst case: all ${n}.`:`Actual: ${realSteps} — you guessed ${chosen}. Cost depends on target position.`,correct?'ok':'bad');
+                    const xp=award(40,correct&&G.integrity>80);
+                    setTimeout(()=>{showOv('🔍',correct?'Record Found — On Target':'Record Found',
+                        `Located ID ${target} at position ${realIdx} — took ${realSteps} check${realSteps>1?'s':''} out of ${n} entries.`,
+                        `Sequential scan checks each entry in order — it can't skip ahead. Cost scales directly with registry size. Best case: 1 check if target is first. Worst case: all ${n} if it's last or missing. With sorted data, a jump-to-middle approach needs only ~${Math.ceil(Math.log2(n))} checks instead of up to ${n}. At larger scales the difference is enormous.`,
+                        [{v:realSteps,l:'Actual checks'},{v:n,l:'Worst case'},{v:'+'+xp,l:'REP earned'}],
+                        [{t:'Try Again',c:'s',fn:()=>{closeOv();roomLinear();}},{t:'System Map',c:'p',fn:exitRoom}]);
+                    },600);}
+                return;}
+            document.getElementById('ln'+i).className='nd s-a';
+            incOps(`check ${G.ops}/${n}`);
+            setCx([{l:'Checked',p:((i+1)/n)*100,c:'var(--cy)',v:i+1},{l:'Remaining',p:((n-i-1)/n)*100,c:'var(--mt)',v:n-i-1},{l:'vs Smart',p:(Math.ceil(Math.log2(n))/n)*100,c:'var(--yw)',v:'≤'+Math.ceil(Math.log2(n))}]);
+            i++;
+        },220);
+    }
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 2: QUICK-FIND INDEX — click midpoint
+// ═══════════════════════════════════════════════
+function roomBinary(){
+    const n=16,arr=Array.from({length:n},(_,i)=>(i+1)*3);
+    const target=arr[Math.floor(Math.random()*n)];
+    let lo=0,hi=n-1,steps=0;
+    const max=Math.ceil(Math.log2(n));
+    setSit('QUICK-FIND INDEX // INEFFICIENT',`Target ID: <span class="bad">${target}</span>. Catalog is sorted 3→48. The fix: always jump to the <span class="warn">exact middle</span> of the remaining range to halve it. Old method scans everything — you must use the halving trick. Max ${max} steps.`);
+    log(`Target: ${target}. ${n} entries. Max ideal steps: ${max}.`,'key');
+
+    function render(){
+        const mid=Math.floor((lo+hi)/2);
+        document.getElementById('nrow').innerHTML='';
+        const row=document.getElementById('nrow');
+        arr.forEach((v,i)=>{
+            const nd=document.createElement('div');nd.id='bn'+i;
+            nd.className='nd '+(i<lo||i>hi?'s-dead':i===lo?'s-lo':i===hi?'s-hi':i===mid?'s-mid':'drag');
+            nd.innerHTML=v+`<span class="ni">${i}</span>`;
+            if(i>=lo&&i<=hi){nd.onclick=()=>pick(i);nd.style.cursor='pointer';}
+            row.appendChild(nd);
+        });
+        setSit('QUICK-FIND INDEX // SEARCHING',`Range: [${lo}–${hi}] · Middle = <span class="warn">${mid}</span> · Value: <span class="hl">${arr[mid]}</span>. Click the <span class="warn">highlighted node</span> to jump there.`);
+        setCx([{l:'Steps used',p:(steps/max)*100,c:'var(--cy)',v:steps},{l:'Max ideal',p:100,c:'var(--mt)',v:max},{l:'Eliminated',p:((n-(hi-lo+1))/n)*100,c:'var(--gn)',v:n-(hi-lo+1)+' of '+n}]);
+        setActs([{t:`✓ JUMP TO MIDDLE [${mid}] = ${arr[mid]}`,c:'cy',fn:()=>pick(mid)}]);
+    }
+
+    function pick(i){
+        const mid=Math.floor((lo+hi)/2);steps++;incOps(`step ${steps}/${max}`);
+        if(i!==mid){
+            damage(25,'Wrong jump point — must pick the exact center to halve the range');
+            setFb(`⚠ Index ${i} is not the middle. Center = ${mid}. Jumping anywhere else fails to halve the remaining entries.`,'bad');
+            log(`Wrong: chose ${i}, center was ${mid}.`,'bad');render();return;
+        }
+        if(arr[i]===target){
+            document.getElementById('bn'+i).className='nd s-found';
+            const xp=award(50,G.integrity>80);
+            setTimeout(()=>{showOv('📇','Target Located',
+                `Found ID ${target} in ${steps} step${steps>1?'s':''}. Maximum needed: ${max}.`,
+                `The halving method works by cutting the search space in half each step. After k jumps, at most ${n}/2ᵏ entries remain. Even with 1,000,000,000 entries, only ~30 jumps are needed — versus up to a billion with full scan. Requirement: the data MUST be sorted first.`,
+                [{v:steps,l:'Steps taken'},{v:max,l:'Max ideal'},{v:'+'+xp,l:'REP'}],
+                [{t:'Try Again',c:'s',fn:()=>{closeOv();roomBinary();}},{t:'System Map',c:'p',fn:exitRoom}]);
+            },600);return;
+        }
+        if(arr[i]<target){setFb(`${arr[i]} < ${target} → target in RIGHT half. Entries 0–${i} eliminated.`,'ok');log(`${arr[i]}<${target} → right [${i+1},${hi}]`,'ok');lo=i+1;}
+        else{setFb(`${arr[i]} > ${target} → target in LEFT half. Entries ${i}–${hi} eliminated.`,'ok');log(`${arr[i]}>${target} → left [${lo},${i-1}]`,'ok');hi=i-1;}
+        render();
+    }
+    render();
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 3: PRIORITY REORDER — drag to swap
+// ═══════════════════════════════════════════════
+function roomBubble(){
+    let arr=[64,34,25,12,22,11,90,42],n=arr.length,pass=0,comps=0,swaps=0,sf=n;
+    setSit('PRIORITY REORDER // DISORDERED',`List scrambled — <span class="bad">highest priority at the bottom</span>. Drag adjacent items to swap. Only swap when left > right. Each pass settles the largest remaining value at the end.`);
+    log(`${n} items. Worst case: ${n*(n-1)/2} comparisons.`,'key');
+
+    function render(){
+        const row=document.getElementById('nrow');row.innerHTML='';
+        arr.forEach((v,i)=>{
+            const nd=document.createElement('div');nd.id='bb'+i;
+            nd.className='nd '+(i>=sf?'s-sorted':'drag');
+            nd.innerHTML=v+`<span class="ni">${i}</span>`;
+            if(i<sf)mkDrag(nd,i,(a,b)=>trySwap(a,b));
+            row.appendChild(nd);
+        });
+        const needSwaps=[];for(let i=0;i<sf-1;i++)if(arr[i]>arr[i+1])needSwaps.push(i);
+        setSit('PRIORITY REORDER // SORTING',`Pass ${pass+1}. <span class="warn">${needSwaps.length} swap${needSwaps.length!==1?'s':''} needed</span> this pass. Drag neighbors to swap. Or press <span class="ok">AUTO PASS</span>.`);
+        setCx([{l:'Comparisons',p:(comps/(n*(n-1)/2))*100,c:'var(--yw)',v:comps},{l:'Swaps',p:(swaps/Math.max(1,n*(n-1)/4))*100,c:'var(--or)',v:swaps},{l:'Settled',p:((n-sf)/n)*100,c:'var(--gn)',v:(n-sf)+'/'+n}]);
+        setActs([{t:'⚡ AUTO PASS',c:'cy',fn:runPass},{t:'✓ FINISH (if ordered)',c:'gn',fn:checkDone}]);
+    }
+
+    function trySwap(a,b){
+        if(Math.abs(a-b)!==1){setFb('Only adjacent swaps! Compare neighbors.','bad');damage(10,'Non-adjacent swap attempt');return;}
+        const l=Math.min(a,b),r=l+1;comps++;incOps();
+        if(arr[l]<=arr[r]){damage(15,`Unnecessary: ${arr[l]}≤${arr[r]}`);setFb(`⚠ ${arr[l]} ≤ ${arr[r]} — already ordered!`,'bad');}
+        else{swaps++;[arr[l],arr[r]]=[arr[r],arr[l]];setFb(`Swapped ${arr[r]}↔${arr[l]}. Total swaps: ${swaps}.`,'ok');log(`Swap [${l}]↔[${r}]. Swaps: ${swaps}.`,'ok');}
+        render();
+    }
+
+    function runPass(){
+        pass++;let swapped=false;
+        for(let j=0;j<sf-1;j++){comps++;if(arr[j]>arr[j+1]){[arr[j],arr[j+1]]=[arr[j+1],arr[j]];swaps++;swapped=true;}}
+        sf--;incOps(`${comps} total comps`);
+        log(`Pass ${pass}: ${n-sf} settled. Swaps this pass: ${swapped}.`,swapped?'ok':'warn');
+        if(!swapped||sf<=1){done();}else render();
+    }
+
+    function checkDone(){
+        let sorted=true;for(let i=0;i<n-1;i++)if(arr[i]>arr[i+1]){sorted=false;break;}
+        if(sorted)done();
+        else{damage(15,'List not fully ordered yet');setFb(`⚠ Not ordered. ${n-sf} items settled, ${sf} remaining.`,'bad');}
+    }
+
+    function done(){
+        const row=document.getElementById('nrow');row.innerHTML='';
+        arr.forEach(v=>{const nd=document.createElement('div');nd.className='nd s-sorted';nd.innerHTML=v;row.appendChild(nd);});
+        const xp=award(55,G.integrity>80);
+        setTimeout(()=>{showOv('🔄','Priority Restored',
+            `Ordered in ${pass} passes: ${comps} comparisons, ${swaps} swaps.`,
+            `Pairwise swap worst case: ${n}×(${n}-1)/2 = ${n*(n-1)/2} comparisons for ${n} items. Even passes with few swaps still check every adjacent pair. At 10,000 items that's ~50 million comparisons — which is why this approach is replaced by smarter methods at scale.`,
+            [{v:comps,l:'Comparisons'},{v:swaps,l:'Swaps'},{v:'+'+xp,l:'REP'}],
+            [{t:'Try Again',c:'s',fn:()=>{closeOv();roomBubble();}},{t:'System Map',c:'p',fn:exitRoom}]);
+        },600);
+    }
+    render();
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 4: PERFORMANCE PROFILER — guess operation counts
+// ═══════════════════════════════════════════════
+function roomClassify(){
+    const qs=[
+        {code:'for i in range(n):\n  process(entry[i])',ctx:'Sequential record check',ops:n=>n,optsFn:n=>{
+            const v=[1,Math.ceil(Math.log2(n)),n,Math.ceil(n*Math.log2(n)),n*n];
+            const labels=[v[0]+' ops','~'+v[1]+' ops',v[2]+' ops','~'+v[3]+' ops',v[4].toLocaleString()+' ops'];
+            return {values:v,labels:labels,correctIdx:2};
+        },whyFn:n=>`One pass through ${n} entries = ${n} operations. Cost grows directly with input size.`},
+        {code:'while lo <= hi:\n  mid=(lo+hi)//2\n  if entry[mid]==t: return\n  elif entry[mid]<t: lo=mid+1\n  else: hi=mid-1',ctx:'Searching a sorted index',ops:n=>Math.ceil(Math.log2(n)),optsFn:n=>{
+            const correct=Math.ceil(Math.log2(n));
+            const v=[1,correct,Math.ceil(n/2),n,Math.ceil(n*Math.log2(n))];
+            const labels=[v[0]+' ops','~'+v[1]+' ops','~'+v[2]+' ops',v[3]+' ops','~'+v[4]+' ops'];
+            return {values:v,labels:labels,correctIdx:1};
+        },whyFn:n=>`Halves each step. n → n/2 → n/4 → 1. Total steps ≈ log₂(${n}) ≈ ${Math.ceil(Math.log2(n))}.`},
+        {code:'for i in range(n):\n  for j in range(n):\n    compare(i, j)',ctx:'Checking all pairs',ops:n=>n*n,optsFn:n=>{
+            const v=[n,Math.ceil(n*Math.log2(n)),n*10,n*n,Math.pow(2,n)];
+            const labels=[v[0]+' ops','~'+v[1]+' ops',v[2].toLocaleString()+' ops',v[3].toLocaleString()+' ops','2^'+n+' ops'];
+            return {values:v,labels:labels,correctIdx:3};
+        },whyFn:n=>`Two nested loops: ${n}×${n} = ${(n*n).toLocaleString()} operations. This grows fast — double n = 4× the work.`},
+        {code:'splitMerge(entries)\n# divides log n times\n# combines at each level',ctx:'Sorting the registry',ops:n=>Math.ceil(n*Math.log2(n)),optsFn:n=>{
+            const correct=Math.ceil(n*Math.log2(n));
+            const v=[n,correct,Math.ceil(n*Math.log10(n)),n*n,Math.ceil(Math.log2(n))];
+            const labels=[v[0]+' ops','~'+v[1]+' ops','~'+v[2]+' ops',v[3].toLocaleString()+' ops','~'+v[4]+' ops'];
+            return {values:v,labels:labels,correctIdx:1};
+        },whyFn:n=>`Divides ~log₂(${n}) ≈ ${Math.ceil(Math.log2(n))} times, combining ${n} entries per level. Total ≈ ${n}×${Math.ceil(Math.log2(n))} = ${Math.ceil(n*Math.log2(n))}.`},
+    ];
+    const nVal=128;
+    let qi=0,correct=0;
+    function nextQ(){
+        if(qi>=qs.length){
+            const xp=award(60,correct===qs.length&&G.integrity>70);
+            showOv('📊','Profiling Complete',
+                `Estimated ${correct}/${qs.length} correctly.`,
+                'Understanding how operation count grows is critical: some routines stay tiny even with massive input, while others explode. Recognizing which is which — without needing formal labels — keeps systems running at any scale.',
+                [{v:correct+'/'+qs.length,l:'Correct'},{v:'+'+xp,l:'REP'}],
+                [{t:'Try Again',c:'s',fn:()=>{closeOv();roomClassify();}},{t:'System Map',c:'p',fn:exitRoom}]);
+            return;
+        }
+        const q=qs[qi];
+        const optData=q.optsFn(nVal);
+        setSit('PERFORMANCE PROFILER // ESTIMATION',`<span class="bad">Fragment ${qi+1}/${qs.length}:</span> ${q.ctx}. For n=${nVal}, how many operations will this run?`);
+        document.getElementById('nrow').innerHTML=`<div style="background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cy);white-space:pre;line-height:1.9;max-width:420px;">${q.code}</div>`;
+        setCx([{l:'Profiled',p:(qi/qs.length)*100,c:'var(--gn)',v:qi+'/'+qs.length},{l:'Score',p:(correct/Math.max(1,qi))*100,c:'var(--cy)',v:correct+' correct'}]);
+        const arena=document.getElementById('arena');
+        let pw=document.getElementById('cpw');
+        if(!pw){pw=document.createElement('div');pw.id='cpw';pw.className='pred-wrap';arena.appendChild(pw);}
+        pw.innerHTML=`<div class="pred-q">For n = ${nVal}, approximately how many operations?</div><div class="pred-opts" id="cpo"></div>`;
+        const po=document.getElementById('cpo');
+        optData.labels.forEach((lbl,i)=>{
+            const b=document.createElement('div');b.className='popt';b.textContent=lbl;
+            b.onclick=()=>{
+                const ok=i===optData.correctIdx;
+                po.querySelectorAll('.popt').forEach((x,j)=>{if(j===optData.correctIdx)x.classList.add('ok');else if(x===b&&!ok)x.classList.add('fail');x.onclick=null;});
+                if(!ok)damage(20,'Wrong estimate — cost analysis needs review');
+                else correct++;
+                setFb((ok?'✓ Correct — ':'✗ Incorrect — ')+q.whyFn(nVal),ok?'ok':'bad');
+                log((ok?'Correct':'Wrong')+': '+q.whyFn(nVal),ok?'ok':'bad');
+                incOps(`${qi+1}/${qs.length} profiled`);qi++;
+                setActs([{t:'NEXT FRAGMENT →',c:'cy',fn:nextQ}]);
+            };
+            po.appendChild(b);
+        });
+        setActs([{t:'Select estimate',c:'',d:true,fn:()=>{}}]);
+    }
+    nextQ();
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 5: STREAM BUFFER — sorted vs random
+// ═══════════════════════════════════════════════
+function roomInsertion(){
+    setSit('STREAM BUFFER // INCOMING DATA',`Live readings arriving out of order. <span class="warn">Input order dramatically affects cost.</span> Choose input type — same routine, very different cycle count. See why order matters.`);
+    document.getElementById('nrow').innerHTML='';
+    log('Slide-to-position: best case minimal, worst case heavy.','key');
+    log('Input order is the determining factor.','warn');
+    setActs([{t:'ORDERED input  [1,2,3,4,5,6,7,8]',c:'gn',fn:()=>doIns([1,2,3,4,5,6,7,8],'ordered')},{t:'RANDOM input  [8,3,6,1,7,2,5,4]',c:'rd',fn:()=>doIns([8,3,6,1,7,2,5,4],'random')}]);
+
+    function doIns(inp,type){
+        let arr=[...inp],n=arr.length,tc=0,i=1;
+        setSit('STREAM BUFFER // PROCESSING',`Input type: <span class="hl">${type}</span>. Each reading slides left into position. Press <span class="ok">INSERT</span> for each. Watch comparisons.`);
+        log(`${type} input selected. Tracking comparisons...`,'key');
+
+        function step(){
+            if(i>=n){
+                const worst=n*(n-1)/2;const xp=award(55,type==='ordered'&&G.integrity>75);
+                showOv('📡','Buffer Processed — '+type.toUpperCase()+' input',
+                    `${tc} comparisons for ${type} input. Worst possible: ${worst}.`,
+                    type==='ordered'
+                        ?`Best case: ordered input means each reading is already in position — 1 comparison per insert = ${n-1} total. The same routine performs brilliantly on favorable input. Now try random to see the difference.`
+                        :`Higher cost: random input forces readings to slide past many entries. The same routine costs far more on unfavorable input. This is why input patterns matter — not just the code, but what it receives.`,
+                    [{v:tc,l:'Comparisons'},{v:worst,l:'Worst case'},{v:'+'+xp,l:'REP'}],
+                    [{t:'Try Other Input',c:'s',fn:()=>{closeOv();roomInsertion();}},{t:'System Map',c:'p',fn:exitRoom}]);
+                return;
+            }
+            const key=arr[i];let cp=0;
+            let tmp=[...arr],tj=i-1;while(tj>=0&&tmp[tj]>key){cp++;tj--;}cp++;
+            const shifts=i-tj-1;
+            setSit('STREAM BUFFER // INSERTING',`Inserting reading <span class="hl">${key}</span> (index ${i}). ${shifts===0?'<span class="ok">Already in place — 1 comparison!</span>':'Needs <span class="warn">'+shifts+'</span> shift'+(shifts!==1?'s':'')+' left.'}`);
+            const row=document.getElementById('nrow');row.innerHTML='';
+            arr.forEach((v,j)=>{const nd=document.createElement('div');nd.className='nd '+(j<i?'s-sorted':j===i?'s-sel':'');nd.innerHTML=v+`<span class="ni">${j}</span>`;row.appendChild(nd);});
+            setCx([{l:'Comparisons',p:(tc/((n*(n-1))/2))*100,c:'var(--yw)',v:tc},{l:'Processed',p:(i/n)*100,c:'var(--gn)',v:i+'/'+n},{l:'Worst case',p:100,c:'var(--b2)',v:n*(n-1)/2}]);
+            incOps(`${tc} comps`);
+            setActs([{t:`INSERT ${key} — ${shifts===0?'in place (1 comp)':shifts+' shift'+(shifts!==1?'s':'')+' ('+cp+' comps)'}`,c:'cy',fn:()=>{
+                tc+=cp;arr.splice(i,1);arr.splice(tj+1,0,key);
+                setFb(shifts===0?`${key} in place — just 1 comparison.`:`${key} shifted ${shifts} spot${shifts!==1?'s':''}. ${cp} comparisons. Total: ${tc}.`,shifts===0?'ok':'info');
+                log(`Inserted ${key}: ${shifts} shifts, ${cp} comps. Total: ${tc}.`,shifts===0?'ok':'');
+                i++;step();
+            }}]);
+        }
+        step();
+    }
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 6: DATA COMBINER — pick smaller head
+// ═══════════════════════════════════════════════
+function roomMerge(){
+    const left=[3,27,38,43],right=[9,10,29,82];
+    const n=left.length+right.length;
+    const correctSeq=[3,9,10,27,29,38,43,82];
+    let placed=[],li=0,ri=0,comps=0;
+    setSit('DATA COMBINER // SPLIT BANKS',`Two sorted data banks. To combine correctly: always <span class="warn">take the smaller head</span> from either bank. Press LEFT or RIGHT. Wrong choice = corrupted output.`);
+    log(`Combining [${left}] with [${right}].`,'key');log('Rule: always select the smaller head element.','warn');
+
+    function render(){
+        const arena=document.getElementById('arena');
+        let ma=document.getElementById('mergeMain');
+        if(!ma){ma=document.createElement('div');ma.id='mergeMain';ma.style.cssText='display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:500px;';arena.appendChild(ma);}
+        const lv=li<left.length?left[li]:null,rv=ri<right.length?right[ri]:null;
+        ma.innerHTML=`
+            <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+                <div style="text-align:center;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--mt);margin-bottom:6px;font-weight:600;">BANK A</div>
+                    <div style="display:flex;gap:5px;">${left.map((v,i)=>`<div class="nd" style="width:46px;height:46px;${i<li?'opacity:.15;border-color:var(--dim);':i===li?'border-color:var(--cy);background:var(--cy2);box-shadow:0 0 10px rgba(37,99,235,.25);':''}">${v}</div>`).join('')}</div>
+                </div>
+                <div style="text-align:center;">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--mt);margin-bottom:6px;font-weight:600;">BANK B</div>
+                    <div style="display:flex;gap:5px;">${right.map((v,i)=>`<div class="nd" style="width:46px;height:46px;${i<ri?'opacity:.15;border-color:var(--dim);':i===ri?'border-color:var(--or);background:var(--or2);box-shadow:0 0 10px rgba(234,88,12,.25);':''}">${v}</div>`).join('')}</div>
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:.54rem;color:var(--mt);margin-bottom:6px;font-weight:600;">COMBINED OUTPUT</div>
+                <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${Array(n).fill(0).map((_,i)=>i<placed.length?`<div class="nd s-sorted" style="width:46px;height:46px;">${placed[i]}</div>`:`<div class="nd" style="width:46px;height:46px;border-style:dashed;opacity:.2;"></div>`).join('')}</div>
+            </div>`;
+        setCx([{l:'Placed',p:(placed.length/n)*100,c:'var(--cy)',v:placed.length+'/'+n},{l:'Comparisons',p:(comps/n)*100,c:'var(--yw)',v:comps},{l:'Ideal',p:100,c:'var(--gn)',v:n+' ops'}]);
+        incOps(`${placed.length}/${n} placed`);
+        if(lv!==null&&rv!==null){
+            setActs([{t:`BANK A: ${lv}`,c:'cy',fn:()=>take('left')},{t:`BANK B: ${rv}`,c:'or',fn:()=>take('right')}]);
+        } else if(lv!==null){
+            setActs([{t:`TAKE BANK A: ${lv} (B exhausted)`,c:'cy',fn:()=>take('left')}]);
+        } else if(rv!==null){
+            setActs([{t:`TAKE BANK B: ${rv} (A exhausted)`,c:'or',fn:()=>take('right')}]);
+        }
+    }
+
+    function take(side){
+        comps++;
+        const lv=li<left.length?left[li]:Infinity,rv=ri<right.length?right[ri]:Infinity;
+        const shouldLeft=lv<=rv,tookLeft=side==='left';
+        if(tookLeft!==shouldLeft){
+            damage(20,`Wrong: should take ${shouldLeft?'BANK A ('+lv+')':'BANK B ('+rv+')'}`);
+            setFb(`⚠ Take ${shouldLeft?'BANK A ('+lv+')':'BANK B ('+rv+')'} — always pick the SMALLER head!`,'bad');
+        } else {
+            const val=tookLeft?lv:rv;placed.push(val);if(tookLeft)li++;else ri++;
+            setFb(`Selected ${val} from ${side}. ${Math.min(lv,rv)} was smaller. Correct.`,'ok');
+            log(`Placed ${val}. ${placed.length}/${n} done.`,'ok');
+            if(placed.length===n){
+                const xp=award(65,G.integrity>75);
+                setTimeout(()=>{showOv('🧬','Data Banks Combined',
+                    `Combined ${n} entries in ${comps} comparisons — exactly ${n} operations.`,
+                    `Merge step: compare the two heads, take the smaller, advance that pointer. Each entry is placed once → ${n} operations per merge level. The full sort applies this repeatedly: divides ~log₂(${n}) ≈ 3 times × ${n} per merge = ~${n*3} total. Compare that to ${n*(n-1)/2} for pairwise swap — the gap widens dramatically at scale.`,
+                    [{v:comps,l:'Comparisons'},{v:n,l:'Merge cost'},{v:'+'+xp,l:'REP'}],
+                    [{t:'Try Again',c:'s',fn:()=>{closeOv();roomMerge();}},{t:'System Map',c:'p',fn:exitRoom}]);
+                },500);return;
+            }
+        }
+        render();
+    }
+    render();
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 7: SPLIT OPTIMIZER — click to choose split
+// ═══════════════════════════════════════════════
+function roomPivot(){
+    const arr=[1,2,3,4,5,6,7,8],n=arr.length;
+    setSit('SPLIT OPTIMIZER // UNBALANCED',`Splitter on ordered input with first-element anchor creates maximally uneven halves — worst case. <span class="warn">Click any element</span> to choose a split point. Balanced = efficient. Unbalanced = ${n*(n-1)/2} ops instead of ~${Math.round(n*Math.log2(n))}.`);
+    log('Ordered input + first-element anchor = worst case.','bad');log('Balanced split = efficient.','key');
+
+    const row=document.getElementById('nrow');row.innerHTML='';
+    arr.forEach((v,i)=>{const nd=document.createElement('div');nd.className='nd drag';nd.id='pv'+i;nd.innerHTML=v+`<span class="ni">${i}</span>`;nd.onclick=()=>choosePivot(i);row.appendChild(nd);});
+    setCx([{l:'Efficient',p:(Math.round(n*Math.log2(n))/(n*n))*100,c:'var(--gn)',v:Math.round(n*Math.log2(n))},{l:'Worst',p:100,c:'var(--rd)',v:n*n}]);
+    setActs([{t:'Click any element above to choose split point',c:'',d:true,fn:()=>{}}]);
+
+    function choosePivot(idx){
+        const pivot=arr[idx];
+        const lpart=arr.filter(v=>v<pivot),rpart=arr.filter(v=>v>pivot);
+        const balanced=lpart.length>0&&rpart.length>0;
+        const depth=balanced?Math.ceil(Math.log2(n)):n-1;
+        const ops=balanced?Math.round(n*Math.log2(n)):n*(n-1)/2;
+        const balance=Math.min(lpart.length,rpart.length)/(n-1);
+
+        arr.forEach((v,i)=>{const nd=document.getElementById('pv'+i);if(nd)nd.className='nd '+(v<pivot?'s-lo':v>pivot?'s-hi':v===pivot?'s-mid':'');});
+        setSit('SPLIT OPTIMIZER // ANALYZED',`Split: <span class="hl">${pivot}</span>. Left: [${lpart.join(',')||'empty'}] Right: [${rpart.join(',')||'empty'}]. Balance: <span class="${balanced?'ok':'bad'}">${balanced?'GOOD':'POOR'}</span>. Depth: ${depth} (ideal: ${Math.ceil(Math.log2(n))}). Ops: ~${ops}.`);
+        setCx([{l:'Balance',p:balance*100,c:balanced?'var(--gn)':'var(--rd)',v:Math.round(balance*100)+'%'},{l:'Recursion',p:(depth/(n-1))*100,c:balanced?'var(--gn)':'var(--rd)',v:depth+' deep'},{l:'Ops ~',p:(ops/(n*n))*100,c:balanced?'var(--gn)':'var(--rd)',v:ops}]);
+        incOps(`split=${pivot}`);
+
+        if(!balanced){damage(30,'Unbalanced split — worst-case degradation');setFb(`⚠ Split on ${pivot} creates ${lpart.length>0?lpart.length:0}-vs-${rpart.length} halves — extremely uneven on ordered input!`,'bad');}
+        else{setFb(`Split on ${pivot}: ${lpart.length} left, ${rpart.length} right — balanced! Depth: ${depth} vs worst case ${n-1}.`,'ok');}
+        log(`Split ${pivot}: balance ${Math.round(balance*100)}%, ops ~${ops}.`,balanced?'ok':'bad');
+        setActs([{t:'Try Another Split',c:'s',fn:()=>{arr.forEach((_,i)=>{const nd=document.getElementById('pv'+i);if(nd){nd.className='nd drag';nd.onclick=()=>choosePivot(i);}});setSit('SPLIT OPTIMIZER // UNBALANCED','<span class="bad">Try again.</span> Click any element to choose a split point. Balanced halves = efficient. Extreme split = costly.');setActs([{t:'Click an element to choose split',c:'',d:true,fn:()=>{}}]);}},
+            {t:'LOCK IN SPLIT',c:'cy',fn:()=>{
+                const xp=award(70,balanced);
+                showOv('⚡','Split Optimized',
+                    `Split ${pivot}: ~${ops} operations. Ideal: ${Math.round(n*Math.log2(n))}. Worst case: ${n*(n-1)/2}.`,
+                    `The splitter's average efficiency requires balanced partitions. On ordered input, the first element is always the smallest — creating a 0-vs-(${n-1}) split. Recursion depth becomes ${n-1} instead of ${Math.ceil(Math.log2(n))}, and operations explode to ${n*(n-1)/2}. Fix: random split point, middle-of-three, or use a hybrid approach.`,
+                    [{v:ops,l:'Your ops'},{v:Math.round(n*Math.log2(n)),l:'Ideal'},{v:n*(n-1)/2,l:'Worst case'},{v:'+'+xp,l:'REP'}],
+                    [{t:'Try Again',c:'s',fn:()=>{closeOv();roomPivot();}},{t:'System Map',c:'p',fn:exitRoom}]);
+            }}
+        ]);
+    }
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 8: CONTAINMENT PROTOCOL — BFS order
+// ═══════════════════════════════════════════════
+function roomBFS(){
+    const graph={0:[1,2],1:[0,3,4],2:[0,5],3:[1],4:[1,6],5:[2],6:[4]};
+    const names=['A','B','C','D','E','F','G'];
+    const n=7;let placed=[],ops=0;
+
+    setSit('CONTAINMENT PROTOCOL // CASCADE',`A cascade spreads node-to-node. Contain it by visiting nodes in <span class="warn">level order</span> — all direct neighbors first, then deeper. Click the correct next node. Highlighted = valid. Wrong order = spread.`);
+    log('Level-order: visit all neighbors before going deeper.','key');log('Visits each node and link once.','key');
+
+    const positions=[[150,18],[70,58],[230,58],[25,98],[115,98],[280,98],[175,98]];
+
+    function getQueue(){const vis=new Set(placed);const q=[];placed.forEach(p=>graph[p].forEach(nb=>{if(!vis.has(nb)&&!q.includes(nb))q.push(nb);}));return q;}
+    function canVisit(node){if(placed.length===0)return node===0;return getQueue().includes(node);}
+
+    function render(){
+        const arena=document.getElementById('arena');
+        let bfsDiv=document.getElementById('bfsDiv');
+        if(!bfsDiv){bfsDiv=document.createElement('div');bfsDiv.id='bfsDiv';bfsDiv.style.cssText='display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;';arena.appendChild(bfsDiv);}
+        const queue=getQueue();
+        let svg=`<svg width="310" height="115" style="overflow:visible;">`;
+        Object.entries(graph).forEach(([u,ns])=>ns.forEach(v=>{if(v>parseInt(u)){const[x1,y1]=positions[u],[x2,y2]=positions[v];svg+=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--b2)" stroke-width="1.5"/>`;}})  );
+        for(let i=0;i<n;i++){
+            const[cx,cy]=positions[i];const vis=placed.includes(i);const next=canVisit(i);
+            const col=vis?'var(--gn)':next?'var(--yw)':'var(--b2)';
+            svg+=`<circle cx="${cx}" cy="${cy}" r="15" fill="${vis?'rgba(5,150,105,.08)':next?'rgba(217,119,6,.08)':'var(--s2)'}" stroke="${col}" stroke-width="${next?2.8:1.5}" style="cursor:${(!vis)?'pointer':'default'}" onclick="${!vis?'bfsClick('+i+')':''}" />
+                  <text x="${cx}" y="${cy+5}" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="${col}" style="pointer-events:none;font-weight:600;">${names[i]}</text>`;
+        }
+        svg+=`</svg>`;
+        bfsDiv.innerHTML=svg+`<div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--mt);text-align:center;">Queue: [${queue.map(q=>names[q]).join(' → ')||'EMPTY'}] · Visited: ${placed.map(p=>names[p]).join('→')||'none'}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--mt);margin-top:4px;">Click a <span style="color:var(--yw);font-weight:600;">highlighted</span> node to visit next</div>`;
+        setCx([{l:'Visited',p:(placed.length/n)*100,c:'var(--gn)',v:placed.length+'/'+n},{l:'Queued',p:(queue.length/n)*100,c:'var(--yw)',v:queue.length},{l:'Ops',p:(ops/(n+7))*100,c:'var(--cy)',v:ops+'/'+(n+7)}]);
+        setOps(ops,'nodes+links');
+        if(placed.length<n)setActs([{t:'Click highlighted nodes on the graph above',c:'',d:true,fn:()=>{}}]);
+    }
+
+    window.bfsClick=function(node){
+        ops++;graph[node].forEach(()=>ops++);incOps('count');
+        if(!canVisit(node)){damage(20,'Out-of-order visit — cascade spread');setFb(`⚠ ${names[node]} is not next in queue! Process by level — visit all neighbors of current level first.`,'bad');render();return;}
+        placed.push(node);setFb(`Visited Node ${names[node]}. Added ${graph[node].filter(nb=>!placed.includes(nb)).length} neighbor(s) to queue.`,'ok');
+        log(`Visited ${names[node]}. Ops: ${ops}.`,'ok');
+        if(placed.length===n){
+            const xp=award(65,G.integrity>75);
+            setTimeout(()=>{showOv('🕸️','Containment Complete',
+                `All ${n} nodes visited in correct level order. Total ops: ${ops}.`,
+                `Level-order visits each node exactly once (${n} visits) and examines each link exactly once (${7} total operations). Total = ${n}+${7} = ${n+7}. For sparse networks this is nearly optimal — the best achievable when you must reach every node. Also guarantees shortest paths in networks without weights.`,
+                [{v:n,l:'Nodes'},{v:7,l:'Links'},{v:'+'+xp,l:'REP'}],
+                [{t:'Try Again',c:'s',fn:()=>{closeOv();placed=[];ops=0;document.getElementById('bfsDiv')&&document.getElementById('bfsDiv').remove();roomBFS();}},{t:'System Map',c:'p',fn:exitRoom}]);
+            },500);return;
+        }
+        render();
+    };
+    render();
+}
+
+// ═══════════════════════════════════════════════
+//  ROOM 9: EFFICIENCY GAUNTLET — predict then race
+// ═══════════════════════════════════════════════
+function roomRace(){
+    const HW=1e8;
+    setSit('EFFICIENCY GAUNTLET // FINAL TEST',`The system runs routines of various cost profiles on large inputs. Choose n, <span class="warn">predict which routines complete in ≤ 1 second</span>, then watch the race. See why cost profile determines real-world survival.`);
+    document.getElementById('nrow').innerHTML='';
+    log('Final assessment: translate cost profile to real-world runtime.','key');
+
+    const ns=[{v:100,c:'gn'},{v:1000,c:'gn'},{v:10000,c:'yw'},{v:100000,c:'yw'},{v:1000000,c:'rd'},{v:10000000,c:'rd'}];
+    setActs(ns.map(o=>({t:'n = '+o.v.toLocaleString(),c:o.c,fn:()=>predictPhase(o.v)})));
+
+    function predictPhase(n){
+        const classes=['Flat Cost','Logarithmic','Linear','Linearithmic','Quadratic'];
+        const opsArr=[1,Math.round(Math.log2(n)),n,Math.round(n*Math.log2(n)),n*n];
+        const survive=opsArr.map(o=>o/HW<=1);
+        const colors=['var(--gn)','var(--cy)','var(--yw)','var(--or)','var(--rd)'];
+
+        setSit('EFFICIENCY GAUNTLET // PREDICTION',`n = <span class="hl">${n.toLocaleString()}</span>. Hardware: 10⁸ ops/sec. <span class="warn">Select ALL routines that finish in ≤ 1 second.</span> Confirm, then launch.`);
+
+        const arena=document.getElementById('arena');
+        let pw=document.getElementById('racePW');
+        if(!pw){pw=document.createElement('div');pw.id='racePW';pw.className='pred-wrap';arena.appendChild(pw);}
+        const sel=new Set();
+        pw.innerHTML=`<div class="pred-q">Which routines survive 1 second at n = ${n.toLocaleString()}?<br><span style="color:var(--mt);font-size:.62rem;">Select all that apply — then confirm.</span></div><div class="pred-opts" id="rpo" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;"></div>`;
+
+        const rpo=document.getElementById('rpo');
+        classes.forEach((c,i)=>{
+            const b=document.createElement('div');b.className='popt';b.textContent=c;
+            b.style.color=colors[i];b.style.borderColor=colors[i];
+            b.onclick=()=>{if(sel.has(i)){sel.delete(i);b.classList.remove('sel');}else{sel.add(i);b.classList.add('sel');}
+                if(sel.size>0)setActs([{t:'▶ LAUNCH RACE',c:'cy',fn:()=>racePhase(n,classes,opsArr,survive,sel,colors,HW)}]);
+            };rpo.appendChild(b);
+        });
+        setActs([{t:'Select predictions then launch',c:'',d:true,fn:()=>{}}]);
+    }
+
+    function racePhase(n,classes,opsArr,survive,predicted,colors,HW){
+        let correctCount=0;
+        survive.forEach((s,i)=>{if(s===predicted.has(i))correctCount++;});
+        if(correctCount<4)damage(15,'Prediction errors — cost analysis needs review');
+
+        setSit('EFFICIENCY GAUNTLET // RUNNING',`n = <span class="hl">${n.toLocaleString()}</span>. Watching all routines execute. Red = FAIL (>1 sec). ✓/✗ = your prediction.`);
+        const arena=document.getElementById('arena');
+        const pw=document.getElementById('racePW');if(pw)pw.style.display='none';
+        let rt=document.getElementById('raceRT');
+        if(!rt){rt=document.createElement('div');rt.id='raceRT';rt.style.cssText='width:100%;max-width:520px;display:flex;flex-direction:column;gap:10px;';arena.appendChild(rt);}
+        rt.innerHTML='';
+
+        const maxOps=Math.max(...opsArr);
+        classes.forEach((c,i)=>{
+            const secs=opsArr[i]/HW;
+            const dead=!survive[i];
+            const pct=Math.max(.4,Math.min(100,(opsArr[i]/maxOps)*100));
+            const predRight=survive[i]===predicted.has(i);
+            const secsStr=secs<0.000001?'<0.0000001s':secs<0.001?secs.toFixed(7)+'s':secs<1?secs.toFixed(4)+'s':secs<60?secs.toFixed(1)+'s':(secs/60).toFixed(1)+' min';
+            const row=document.createElement('div');
+            row.style.cssText='display:flex;align-items:center;gap:8px;';
+            row.innerHTML=`<div style="font-family:'JetBrains Mono',monospace;font-size:.66rem;min-width:74px;color:${colors[i]};font-weight:700;">${c}</div>
+                <div style="flex:1;height:28px;background:var(--dim);border-radius:4px;overflow:hidden;position:relative;">
+                    <div style="height:100%;background:${colors[i]};opacity:${dead?.2:.8};width:0%;transition:width 1.4s ease;border-radius:4px;" data-p="${pct}"></div>
+                    <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 8px;font-family:'JetBrains Mono',monospace;font-size:.55rem;color:${dead?'#555':'rgba(0,0,0,.7)'};">${opsArr[i].toLocaleString()} ops</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:.58rem;min-width:100px;text-align:right;color:${dead?'var(--rd)':colors[i]};">${secsStr}${dead?' ⚠':''} <span style="color:${predRight?'var(--gn)':'var(--rd)'};">${predRight?'✓':'✗'}</span></div>`;
+            rt.appendChild(row);
+        });
+
+        setTimeout(()=>{rt.querySelectorAll('[data-p]').forEach(f=>{f.style.width=f.dataset.p+'%';});},60);
+        log(`n=${n.toLocaleString()}: predictions ${correctCount}/5 correct.`,correctCount>=4?'ok':'warn');
+        log(`Quadratic = ${opsArr[4].toLocaleString()} ops = ${(opsArr[4]/HW).toFixed(1)}s.`,survive[4]?'':'bad');
+        incOps(`n=${n.toLocaleString()}`);
+        setCx([{l:'Log',p:(opsArr[1]/opsArr[4])*100,c:'var(--cy)',v:opsArr[1]+' ops'},{l:'Linear',p:(opsArr[2]/opsArr[4])*100,c:'var(--yw)',v:opsArr[2].toLocaleString()},{l:'N·LogN',p:(opsArr[3]/opsArr[4])*100,c:'var(--or)',v:opsArr[3].toLocaleString()},{l:'N²',p:100,c:'var(--rd)',v:opsArr[4].toLocaleString()}]);
+
+        setTimeout(()=>{
+            setActs([
+                {t:'Try Different n',c:'s',fn:()=>{rt.style.display='none';const pw2=document.getElementById('racePW');if(pw2)pw2.style.display='none';document.getElementById('nrow').innerHTML='';roomRace();}},
+                {t:'COMPLETE — ALL MODULES PASSED',c:'cy',fn:()=>{
+                    const xp=award(90,correctCount>=4);
+                    showOv('🏁','Assessment Complete',
+                        `All modules analyzed. Final prediction accuracy: ${correctCount}/5.`,
+                        `Cost profile determines real-world survival. At n=100,000: Logarithmic≈0.0000002s, Linear≈0.001s, Linearithmic≈0.017s, Quadratic≈100 SECONDS. Routine selection is not academic — it is the difference between systems that scale and systems that fail. You now have the instinct to choose correctly.`,
+                        [{v:correctCount+'/5',l:'Predictions'},{v:G.cleared.length,l:'Modules restored'},{v:G.score.toLocaleString(),l:'Total credits'},{v:'+'+xp,l:'REP'}],
+                        [{t:'Race Again',c:'s',fn:()=>{closeOv();roomRace();}},{t:'System Map',c:'p',fn:exitRoom}]);
+                }}
+            ]);
+        },1600);
+    }
+}
+</script>
+</body>
+</html>
