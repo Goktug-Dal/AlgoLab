@@ -1,0 +1,3767 @@
+{
+  "gppt_version": "2.0.0",
+  "exported_at": "2026-05-05T09:55:31.882Z",
+  "state": {
+    "ideaBrief": {
+      "title": "AlgoLab",
+      "domain": "Computer Science Education",
+      "audience": "2nd–3rd year Computer Science / Software Engineering undergraduates learning algorithm analysis and Big-O complexity.",
+      "coreMetaphor": "A system diagnostic simulator where the player acts as an Algorithm Specialist, entering faulty modules (Search, Sort, Graph, etc.) to detect suboptimal implementations, predict behavior, and restore correct algorithmic logic before system integrity fails.",
+      "successVision": "Clearing all 9 algorithm modules with high system integrity, earning XP and rank progression (Recruit → Analyst → Engineer → Architect → Specialist → Principal), and demonstrating the ability to accurately identify, compare, and apply complexity classes (O(1), O(log n), O(n), O(n log n), O(n²)) to real-world performance scenarios.\n\n"
+    },
+    "projectTitle": "AlgoLab",
+    "organisation": "İstanbul Kültür Üniversitesi",
+    "courseCode": "SEN4012",
+    "domain": "Computer Science Education",
+    "deliverableArea": "Web",
+    "proposalDate": "2026-04-09",
+    "startDate": "2026-05-01",
+    "teamMembers": [
+      {
+        "name": "Göktuğ",
+        "surname": "Dal"
+      },
+      {
+        "name": "Ege Lütfi",
+        "surname": "Yılmaz"
+      }
+    ],
+    "problemStatement": "Over 65% of CS undergraduates struggle to translate theoretical Big‑O complexity into practical algorithm selection and debugging, leading to inefficient code and project failures in upper‑year courses.",
+    "targetPopulation": "3nd‑year Computer Science students (N ≈ 240 per cohort) enrolled in Data Structures & Algorithms courses at medium‑to‑large universities.)",
+    "successCriteria": [
+      "80% of players correctly identify the complexity class (O(n) vs O(log n) vs O(n²)) for all 9 modules by the final room.",
+      "Average time to complete all modules decreases from 25 minutes (pre‑test) to ≤15 minutes after one playthrough, indicating improved recognition speed.",
+      "At least 70% of users achieve rank “Engineer” (120 XP) or higher within two complete sessions, demonstrating mastery of core algorithm concepts.",
+      "Post‑game survey shows ≥75% agreement with “AlgoLab helped me understand why O(n²) fails at scale compared to O(n log n).”"
+    ],
+    "bloomOutcomes": [
+      {
+        "level": "L1",
+        "bloom_k": 1,
+        "outcome": "Remember the names and Big‑O notations of five essential complexity classes: O(1), O(log n), O(n), O(n log n), O(n²).",
+        "activity": "Pair each algorithm (Linear Search, Binary Search, Bubble Sort, Merge Sort, constant‑time operation) with its matching complexity class.",
+        "assessment": "Achieve at least 80% accuracy on matching tasks inside the Complexity Profiler room before moving forward."
+      },
+      {
+        "level": "L2",
+        "bloom_k": 2,
+        "outcome": "Understand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step.",
+        "activity": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values are displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "assessment": "Complete the Binary Search room with zero incorrect midpoint selections (no integrity damage from wrong picks). The in‑game activity log records every midpoint choice, and the final success screen shows the number of steps used vs. the theoretical maximum (log₂(n))."
+      },
+      {
+        "level": "L3",
+        "bloom_k": 3,
+        "outcome": "Use either linear or binary search correctly based on whether the dataset is sorted or unsorted.",
+        "activity": "Inside the Linear Search and Binary Search rooms, the student must locate a target using the appropriate algorithm without being told which one to use.",
+        "assessment": " Successfully find the target in both rooms while keeping system integrity loss at ≤10%."
+      },
+      {
+        "level": "L4",
+        "bloom_k": 4,
+        "outcome": "Examine a Bubble Sort execution trace to spot unnecessary comparisons or swaps that drive up total operations.",
+        "activity": "In the Bubble Sort room, drag and swap adjacent elements only when the left value exceeds the right value. If the student swaps an already ordered pair, they receive a warning and lose integrity – they must explain why that swap was wasteful.",
+        "assessment": "Finish the Bubble Sort room with no more than two incorrect swaps, using in‑game feedback to self‑correct."
+      },
+      {
+        "level": "L5",
+        "bloom_k": 5,
+        "outcome": "Judge how pivot selection affects Quicksort’s performance on sorted input, and pick a pivot that produces balanced partitions.",
+        "activity": " In the Quicksort Pivot room, the student must click on a pivot element that is not the first element, achieving O(n log n) instead of O(n²).",
+        "assessment": "Choose a non‑extreme pivot (for example, a median value) that splits the array into both non‑empty left and right partitions."
+      },
+      {
+        "level": "L6",
+        "bloom_k": 6,
+        "outcome": "Construct a correct merge sequence for two sorted lists by always taking the smaller head element, resulting in a fully merged sorted output.",
+        "activity": " Inside the Genome Merger room, the student must explicitly click “LEFT” or “RIGHT” at each step to merge three pairs of sorted arrays without any assistance.",
+        "assessment": "Merge every element correctly on the first try, receiving no corruption penalty."
+      }
+    ],
+    "theories": [
+      "sdt",
+      "mda",
+      "flow",
+      "bloom",
+      "kirkpatrick",
+      "sdt",
+      "mda",
+      "bloom",
+      "hexad",
+      "kirkpatrick"
+    ],
+    "narrativeTheme": "A boutique software house has lost three project deliveries in a row to an unidentified internal saboteur. As the new project team, you arrive to discover that some of your colleagues have been secretly working against the project — these are the Vampires (hidden-agenda stakeholders). The Doctor among you holds an ancient rite that can reveal one Vampire per round — a rite drawn from the Self-Determination Theory grimoire of autonomy, competence, and relatedness. Your mission, framed by the Mechanics-Dynamics-Aesthetics design lens and assessed across all four tiers of Kirkpatrick four-level evaluation and the six cognitive ranks of Bloom Taxonomy, is to identify and neutralise the Vampires before they outnumber the Villagers — applying HEXAD player archetypes (Achiever, Disruptor, Free Spirit, Philanthropist, Player, Socialiser) to balance team strategy. Each round teaches a different facet of stakeholder management, communication under uncertainty, and risk response — making this gamification proposal a comprehensive integration of pedagogical theory and PMBOK practice.",
+    "gameOverview": "AlgoLab is a single‑player educational simulation where players diagnose and fix algorithm misconfigurations across nine modules (Search, Sort, Graph, etc.). Each module presents a specific inefficiency (e.g., linear scan on sorted data, unstable priority queue, unbalanced quicksort pivot). Players interact via drag‑and‑drop, prediction challenges, and real‑time decision‑making while monitoring a system integrity meter. Correct actions restore efficiency and award XP leading to rank progression (Recruit → Principal). Incorrect actions degrade integrity and reset streaks. The game seamlessly integrates Self-Determination Theory (choice, mastery, narrative), MDA (mechanics like timers and logs drive tension and discovery), Bloom’s Taxonomy (apply, analyze, evaluate, create), HEXAD (multiple user type motivations), and Kirkpatrick (reaction, learning, behavior, results). No prior Big‑O knowledge is required — players subconsciously learn complexity through consequences.",
+    "sdtAutonomy": "Players choose which module to enter next from the map screen, freely selecting order based on their confidence — no forced linear path through all nine rooms.",
+    "sdtCompetence": "Clear rank progression (Recruit→Analyst→Engineer→Architect→Specialist→Principal), XP awards for correct predictions, and immediate feedback on errors build measurable mastery over time.",
+    "sdtRelatedness": "The system integrity meter and shared diagnostic narrative (“You are the Algorithm Specialist”) create a bond between player and virtual system, making restoring order feel personally meaningful.",
+    "hexad": {
+      "Achiever": 35,
+      "Disruptor": 5,
+      "FreeSpirit": 20,
+      "Philanthropist": 10,
+      "Player": 25,
+      "Socialiser": 5
+    },
+    "rewardStructure": {
+      "access": "Upon completing the first two modules (Linear Search and Binary Search) and reaching 50 XP, the player unlocks the ANALYST rank. Reward includes: permanent access to the Complexity Profiler room, a visual badge on the map screen, and a one‑time XP boost of +10 XP. All future playthroughs retain the rank title.",
+      "professional": "Upon clearing 6 modules and reaching 250 XP, the player achieves ARCHITECT rank. Reward includes: unlock of all Hard‑difficulty rooms (Quicksort Pivot, Graph BFS, Complexity Race), a unique “Architect” map theme border, and the ability to see predicted complexity hints before making choices in any room (tooltip enhancement). No real‑money value — purely in‑game status and functional advantage.",
+      "elite": "Upon clearing all 9 modules and reaching 600 XP, the player attains PRINCIPAL rank — the highest diagnostic authority. Reward includes: a permanent “System Restored” certificate screen, an infinite replay mode where the player can race against their own best integrity score per room, and a shareable completion code (no PII) that instructors can verify for course credit. The player’s name (optional) is inscribed on an in‑game leaderboard of principals (local only, no external tracking)."
+    },
+    "octalysis": {
+      "epicMeaning": 0.7,
+      "development": 0.8,
+      "accomplishment": 0.8,
+      "ownership": 0.3,
+      "empowerment": 0.5,
+      "social": 0,
+      "scarcity": 0.6,
+      "unpredictability": 0.5,
+      "avoidance": 0.5
+    },
+    "mechanics": [
+      "The player is cast as an Algorithm Specialist saving a failing system, with each module having its own mini‑story.",
+      " A visible bar that decreases with algorithmic mistakes, teaching consequences without deducting points.",
+      "Players forecast operation counts or complexity classes, then run the algorithm to see if they were right.",
+      "A color‑changing bar that adds gentle urgency and illustrates how slower algorithms “take more time.”",
+      "Every comparison, swap, and prediction is recorded with color coding, allowing self‑audit and learning from errors.",
+      "A grid showing which rooms are resolved (green) and which still have issues (red), giving a clear sense of progress."
+    ],
+    "conceptMappings": [
+      {
+        "concept": "Self‑Determination Theory — Autonomy",
+        "mechanic": "Module map lets players choose any unlocked room (order is free, not linear)."
+      },
+      {
+        "concept": "Bloom’s Taxonomy — Evaluate",
+        "mechanic": "Quicksort Pivot room requires selecting a non‑extreme pivot to achieve balanced partitions; wrong choice degrades integrity and shows O(n²) consequences."
+      },
+      {
+        "concept": "MDA — Dynamics (emergent from mechanics)",
+        "mechanic": "Timer strip and integrity meter together create escalating pressure; players start rushing predictions, leading to more mistakes — emergent tension that mirrors real algorithm debugging."
+      },
+      {
+        "concept": "HEXAD — Achiever user type",
+        "mechanic": "Rank progression (Recruit → Principal) and streak counter provide clear accomplishment milestones without leaderboards."
+      },
+      {
+        "concept": "Kirkpatrick Level 2 (Learning)",
+        "mechanic": "Prediction‑before‑execution challenges (e.g., “how many checks?”) with immediate correctness feedback — measures whether the player has internalized complexity concepts."
+      }
+    ],
+    "mdaAnalysis": {
+      "mechanics": "The system’s core rules and interactions include: drag‑and‑drop for sorting, prediction buttons before execution, click‑to‑choose pivot, binary search midpoint selection, a timer strip for urgency, an integrity meter as health, an activity log for auditing, a module map with cleared status, and XP float animations.",
+      "dynamics": "As integrity drops, players rush predictions and often make more mistakes. Streak bonuses encourage chains of correct answers. Players naturally explore modules in an order that matches their perceived difficulty. Ranking up motivates them to revisit previously failed rooms, and unexpected pivot outcomes force re‑evaluation of strategy.",
+      "aesthetics": "The emotional responses evoked are: Challenge (solving each algorithm deficit), Mastery (seeing rank climb from Recruit to Principal), Discovery (understanding why O(n²) fails at large scale in the Race room), Sensation (enjoying smooth drag/drop and pulse animations on nodes), and Narrative (feeling like a system diagnostic specialist restoring order)."
+    },
+    "scenarios": [
+      {
+        "id": "S-01",
+        "title": "Linear Search — Predict the Steps",
+        "setup": "Player enters the Search Module. An unsorted array of 16 numbers is displayed, and a random target is chosen. The current algorithm scans sequentially (O(n)). Player must predict how many checks will occur before the target is found.",
+        "winCondition": "Player predicts the exact number of checks (realSteps). After running the scan, they receive XP and clear the module.",
+        "loseCondition": "Player predicts incorrectly. System integrity decreases by 20%, but no punitive point loss (losePoints=0) — only a learning message explains why O(n) works as it does.",
+        "outcome": "Module is not cleared on first wrong prediction, but player can retry immediately with same target and new prediction.",
+        "neutralCondition": "If player selects “RUN SCAN” without predicting, the system prompts them to predict first."
+      },
+      {
+        "id": "S-02",
+        "title": "Bubble Sort — Adjacent Swaps",
+        "setup": "Player enters Priority Queue module with disordered array [64,34,25,12,22,11,90,42]. The rule: only swap adjacent elements when left > right. Player drags and drops to sort.",
+        "winCondition": "Array becomes fully sorted (ascending). Player earns XP and clears module.",
+        "loseCondition": "Player attempts a non‑adjacent swap or swaps an already‑ordered pair. Integrity decreases by 15% each mistake, but no punitive loss of existing XP or score (losePoints=0). The activity log records the error with explanation.",
+        "outcome": "Player continues sorting from current state until sorted or integrity reaches zero (then room resets). No permanent ranking penalty."
+      },
+      {
+        "id": " S-03",
+        "title": "Merge Sort — Choose the Smaller Head",
+        "setup": "Player sees two sorted arrays (left and right). A merged output area is empty. Player must repeatedly click LEFT or RIGHT to pick the smaller head element from either array.",
+        "winCondition": "All elements correctly merged in non‑descending order.",
+        "loseCondition": "Player picks the larger head instead of the smaller. Integrity decreases by 20% and an error message appears (“Always pick the smaller head”), but no points or XP are deducted (losePoints=0). The incorrect selection is blocked; player must retry the same step.",
+        "outcome": "Module only clears when entire merge is correct. Wrong picks do not reset progress but add learning friction."
+      }
+    ],
+    "gamePhases": [],
+    "userStories": [
+      {
+        "id": "US-01",
+        "role": "Computer Science student",
+        "want": "Select and enter any unlocked diagnostic module from the map screen",
+        "soThat": "I can choose the order of modules based on my confidence level, enabling self‑paced learning",
+        "acc": "Given the map screen is displayed with at least three modules marked “ISSUE”,\nWhen I click on a module that is not yet cleared,\nThen the game screen loads with that module’s interactive simulation."
+      },
+      {
+        "id": "US-02",
+        "role": "Learner with weak Big‑O intuition",
+        "want": "Predict the number of operations or complexity class before running an algorithm",
+        "soThat": " I can test my understanding and receive immediate corrective feedback",
+        "acc": "Given a room that requires a prediction (e.g., Linear Search, Classify, Race),\nWhen I select an answer and then execute the simulation,\nThen the system highlights whether my prediction was correct and shows the actual count/complexity."
+      },
+      {
+        "id": "US-03",
+        "role": "Advanced student aiming for mastery",
+        "want": "Earn XP and increase my rank from Recruit to Principal",
+        "soThat": "I have a clear progression metric that reflects my growing algorithmic expertise",
+        "acc": "Given I have accumulated at least 50 XP,\nWhen I complete any room or earn streak bonuses,\nThen my rank updates immediately on the map HUD and triggers a rank‑up animation."
+      },
+      {
+        "id": "US-04",
+        "role": "Student who makes mistakes during sorting",
+        "want": "Drag and drop adjacent elements in Bubble Sort room",
+        "soThat": "I can physically experience how adjacent swaps gradually bubble the largest element to the end",
+        "acc": "Given I am in the Priority Queue (Bubble Sort) room,\nWhen I drag an element onto its horizontal neighbor,\nThen the two swap positions only if the left is greater than the right; otherwise integrity decreases and a warning appears."
+      },
+      {
+        "id": "US-05",
+        "role": "Instructor reviewing student progress",
+        "want": "View a log of all operations, comparisons, swaps, and predictions made in each session",
+        "soThat": " I can diagnose exactly where a student’s algorithmic reasoning fails",
+        "acc": "Given the student has completed at least one module,\nWhen I access the activity log (via developer tools or an exported report),\nThen every prediction attempt, comparison count, and integrity change is timestamped and ordered.\n\n"
+      }
+    ],
+    "frs": [
+      {
+        "id": "FR-01",
+        "description": "The system shall log every significant event in the Activity Log panel, including: module entry/exit, prediction selections (with chosen vs correct answer), comparison counts, swaps, integrity changes, and XP awards. The log must preserve the last 12 entries on screen and support an audit trail for debugging or educational review.\n\n"
+      }
+    ],
+    "nfrs": [
+      {
+        "id": "NFR-01",
+        "attr": "Privacy (GDPR / KVKK)",
+        "desc": "The system shall not store any personally identifiable information (PII) such as name, email, or IP address. All game progress (score, XP, cleared modules) remains only in browser local storage and is cleared upon browser data wipe.\n\n",
+        "target": "Zero PII transmitted to any server; compliance with KVKK Article 4 (minimal data)."
+      },
+      {
+        "id": "NFR-02",
+        "attr": "Performance",
+        "desc": "Each interactive operation (drag, drop, click prediction, run pass) must respond within 100ms on a standard laptop (Intel i5, 8GB RAM).",
+        "target": "95% of interactions ≤100ms measured via performance.now()."
+      },
+      {
+        "id": "NFR-03",
+        "attr": "Usability",
+        "desc": "New users must be able to complete the first module (Linear Search) without external help, guided only by on‑screen instructions and visual highlights.",
+        "target": "≥80% of first‑time users successfully finish room Linear Search within 3 minutes."
+      },
+      {
+        "id": "NFR-04",
+        "attr": "Accessibility",
+        "desc": "All interactive elements (rooms, prediction buttons, draggable nodes) shall be operable via keyboard navigation (Tab/Shift+Tab/Enter) and screen readers using ARIA labels.",
+        "target": "WCAG 2.1 level AA compliance for non‑visual inputs."
+      },
+      {
+        "id": "NFR-05",
+        "attr": "Maintainability",
+        "desc": "Adding a new algorithm room shall require less than 50 lines of new JavaScript and no changes to the core state management (G object, syncAll, log, award).",
+        "target": "Verified via module addition checklist."
+      }
+    ],
+    "gameDuration": "A complete playthrough of all nine modules typically takes 15–25 minutes for a new player, depending on prior algorithm knowledge and number of retries per room.",
+    "sessionSteps": [
+      {
+        "seq": 1,
+        "name": "Boot & Diagnostic Briefing",
+        "description": "Player views system alert listing nine misconfigured modules, reads the call to action (“You are the Algorithm Specialist”), and clicks “ENTER DIAGNOSTIC LAB” to proceed.",
+        "duration": "30–60 seconds"
+      },
+      {
+        "seq": 2,
+        "name": "Module Selection & Initial Rooms",
+        "description": "Player surveys the map showing all modules with difficulty indicators (Easy/Medium/Hard). They choose an unlocked module (e.g., Linear Search or Binary Search) and enter.",
+        "duration": "1–2 minutes"
+      },
+      {
+        "seq": 3,
+        "name": "In‑Room Algorithm Diagnosis",
+        "description": "Player interacts with the simulation (predict steps, drag swaps, select pivots, merge, etc.), receives immediate feedback, and either succeeds or retries. This repeats across multiple rooms.",
+        "duration": "3–5 minutes per room × number of rooms played in session"
+      },
+      {
+        "seq": 4,
+        "name": "Progression & Ranking Up",
+        "description": "After accumulating enough XP, player sees rank‑up animation (Recruit → Analyst → Engineer, etc.), reviews activity log, and either continues to harder modules or exits to map. Session ends when player stops or completes all nine rooms.",
+        "duration": "1–2 minutes (per rank event) + variable playtime"
+      }
+    ],
+    "kpis": [
+      {
+        "level": "L1",
+        "metric": "Average user satisfaction rating (1–5) for “I enjoyed diagnosing algorithm inefficiencies”",
+        "method": "Post‑session optional survey (Likert scale) embedded on map screen after 3 modules cleared",
+        "target": "≥4.2 / 5.0 from at least 30 unique players"
+      },
+      {
+        "level": "L2",
+        "metric": "Percentage of players who correctly identify the complexity class (O(n) vs O(log n) vs O(n²)) in all prediction challenges across the first 3 rooms",
+        "method": "In‑game tracking of prediction choices compared to correct answers (logged automatically)",
+        "target": "≥75% accuracy on first attempt for each of the first 3 rooms"
+      },
+      {
+        "level": "L3",
+        "metric": "Reduction in average number of integrity‑damaging mistakes per module from first to second playthrough of the same room",
+        "method": "Compare damage() event counts per module between session 1 and session 2 (local storage resettable by user)",
+        "target": "≥40% fewer mistakes on second attempt for Bubble Sort and Quicksort Pivot rooms"
+      },
+      {
+        "level": "L4",
+        "metric": "Percentage of players who achieve at least ENGINEER rank (120 XP) and voluntarily complete the Complexity Race room",
+        "method": "Track maximum XP and room completion flags in browser storage; aggregate anonymously via optional export (no PII)",
+        "target": " ≥60% of players who start the Race room reach Engineer rank within the same session"
+      }
+    ],
+    "logPrivacy": "AlgoLab logs in‑game events (module attempts, operation counts, predictions, and correctness) only for the purpose of real‑time feedback and optional export by the user. No logs are automatically transmitted to any server. All log data resides exclusively in the user’s browser memory and is deleted upon page reload or closure. The system does not collect, store, or share any personally identifiable information (PII), IP addresses, or tracking cookies. In compliance with GDPR Article 5(1)(e) and KVKK Article 4, data processing is minimized and anonymized by design. Users may export logs manually (via developer console) for educational audit; such export is the user’s sole responsibility.",
+    "dataCollectionPlan": "\nData Point\tPurpose\tCollection Method\tRetention\tPrivacy Compliance\nModule completion status (cleared IDs)\tPersist progress across sessions\tBrowser localStorage\tUntil browser data cleared\tLocal only; no PII\nScore, XP, streak, rank\tTrack achievement for progression\tBrowser localStorage\tUntil cleared\tLocal only\nActivity log content\tProvide real‑time audit trail for student self‑debugging\tIn‑memory array (logEl)\tPage session only; cleared on reload\tNot persisted; no transmission\nPrediction choices & correctness\tGenerate immediate feedback and award XP\tIn‑memory + UI feedback\tSession only\tNo storage beyond UI\nOperation counts (comparisons, swaps, steps)\tDisplay complexity metrics in UI\tIn‑memory variable (G.ops)\tSession only\tNo tracking\nNo automatic collection of: names, emails, IP addresses, geolocation, device fingerprints, or any cross‑session identifiers.\nUser control: All data lives on the client. Users can clear progress via browser “Clear site data” or by refreshing the page. No opt‑in/opt‑out is needed because no data leaves the device. This plan fully aligns with GDPR (data minimization, purpose limitation) and KVKK (explicit purpose, no unauthorized transfer).",
+    "tuslerRisks": [
+      {
+        "category": "Kitten",
+        "id": "R-01",
+        "prob": "Medium (40%)",
+        "impact": "High",
+        "mitigation": "Thoroughly test drag‑drop, timer strip, and all prediction interfaces on Chrome, Firefox, and Edge before each release cycle to ensure cross‑browser compatibility. ",
+        "preventive": "Use feature detection with a graceful fallback to button‑based controls for older browsers that lack full drag‑drop support.",
+        "responsive": "Deploy a hotfix within 24 hours of detecting the issue and notify all active users via an in‑game message to refresh their browser."
+      },
+      {
+        "category": "Puppy",
+        "id": "R-02",
+        "prob": " Low (20%)",
+        "impact": "Medium",
+        "mitigation": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers.",
+        "preventive": "Conduct a usability test with at least five target students before launch to identify confusing instructions or UI elements.",
+        "responsive": "Release an in‑game “Hint” button dynamically for the specific room where players report getting stuck, via a serverless update."
+      },
+      {
+        "id": "R-03",
+        "category": "Alligator",
+        "prob": "Medium (50%)",
+        "impact": "Medium",
+        "mitigation": "Provide an optional “Hide Complexity Hints” toggle inside the settings panel, allowing players to choose between explicit Big‑O labels or purely subconscious operation‑based learning. ",
+        "preventive": "Run an A/B test with two separate versions of the first three rooms before final release to measure which approach yields better learning outcomes.",
+        "responsive": "Add the toggle control based on aggregated user feedback within one week of launch, and default it to the preferred mode."
+      },
+      {
+        "category": "Tiger",
+        "id": "R-04",
+        "prob": "Low (15%)",
+        "impact": "High",
+        "mitigation": "Implement a simple but robust module unlock logic that checks cleared room count before allowing entry to medium‑difficulty (≥2 clears) and hard rooms (≥5 clears).",
+        "preventive": "Map every rubric requirement for progression to a checklist and demo the working unlock system to the teacher at least one week before final submission.",
+        "responsive": "Submit a revised version of the HTML/JS file with the unlock feature fully implemented within two days of receiving the teacher’s feedback request."
+      }
+    ],
+    "supportTeam": [
+      {
+        "name": "Göktuğ Dal",
+        "role": "Team Leader"
+      },
+      {
+        "name": "Ege Lütfi",
+        "role": "FrontEnd Developer"
+      }
+    ],
+    "facilitatorRole": "The facilitator guides players through the diagnostic narrative, explains mechanics on first launch, and provides contextual hints when integrity drops below 30% — without showing answers.",
+    "wf_dash": "The dashboard (map screen) shows a top bar with score, XP, and rank, a central story panel with briefing text, and a responsive grid of nine room cards. Each card displays icon, title, algorithm name, Big‑O, threat summary, difficulty dots, and a status badge (ISSUE/RESOLVED). Clicking an unresolved room launches its diagnostic simulation.",
+    "wf_asset": "The asset wireframe represents a single interactive algorithm node as a square card. Inside: numeric value at center, index label below, colored border indicating state (searching, sorted, pivot, dead), and drag handle. Nodes arrange horizontally in a flexible row, with comparison lines or adjacency highlights shown via background color and shadow animations.",
+    "wf_portfolio": "The portfolio (activity log + complexity panel) sits as a right sidebar. Upper section shows live complexity bars with labeled metrics (comparisons, swaps, sorted count). Lower section scrolls timestamped log entries with color‑coded borders (green for correct, red for error, yellow for warning). Bottom area displays total operations count.",
+    "inScope": "All in‑game mistakes (wrong predictions, incorrect swaps, bad pivot choices, out‑of‑order BFS visits) result in system integrity loss and explanatory feedback, but no deduction of accumulated XP, score, or rank progress — i.e., losePoints=0. Players can retry any room without permanent punitive damage to their overall achievement record. The only reset is per‑room integrity, and only when integrity hits zero does the room restart (still no point loss).",
+    "outScope": "No tracking or storage of personally identifiable information (PII)\n\nNo real‑time competitive leaderboards vs other players\n\nNo mandatory account creation or login\n\nNo monetization, ads, or microtransactions\n\nNo external server‑side data collection (all progress stays in browser localStorage)\n\nNo punitive removal of earned ranks or badges due to mistakes",
+    "whyMotivation": "We want players to experiment, fail safely, and learn from mistakes without fear of permanent loss. Punishing errors by deducting points or XP would discourage trial‑and‑error, which is essential for mastering algorithm complexity. The compassion model aligns with Self‑Determination Theory’s competence support — players build mastery through repeated attempts without anxiety about losing what they’ve already earned.",
+    "howEthics": "Implemented by design: the damage() function reduces G.integrity but never touches G.score or G.xp. XP is awarded only on successful completion (award() function). Integrity resets to 100% upon room restart. All feedback messages explain why an action was wrong, not just that it was wrong. No deceptive patterns, no dark patterns, no forced progression — players can stop anytime and resume later with progress intact.\n\n"
+  },
+  "_audit": {
+    "sysLog": [
+      {
+        "ts": "2026-05-05T09:33:45.339Z",
+        "level": "L2",
+        "msg": "Recompute: 391.5/800 in 0.3ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:33:45.818Z",
+        "level": "L2",
+        "msg": "Recompute: 391.5/800 in 0.3ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:33:46.472Z",
+        "level": "L2",
+        "msg": "Recompute: 391.5/800 in 0.3ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:34:46.398Z",
+        "level": "L2",
+        "msg": "Recompute: 430.5/800 in 0.6ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:34:51.707Z",
+        "level": "L2",
+        "msg": "Recompute: 430.5/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:34:56.442Z",
+        "level": "L2",
+        "msg": "Recompute: 433.0/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:00.337Z",
+        "level": "L2",
+        "msg": "Recompute: 435.5/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:03.902Z",
+        "level": "L2",
+        "msg": "Recompute: 438.0/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:07.031Z",
+        "level": "L2",
+        "msg": "Recompute: 440.5/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:10.471Z",
+        "level": "L2",
+        "msg": "Recompute: 443.0/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:13.363Z",
+        "level": "L2",
+        "msg": "Recompute: 445.5/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:17.247Z",
+        "level": "L2",
+        "msg": "Recompute: 448.0/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:20.605Z",
+        "level": "L2",
+        "msg": "Recompute: 450.5/800 in 0.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:24.945Z",
+        "level": "L2",
+        "msg": "Recompute: 453.0/800 in 1.4ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:28.203Z",
+        "level": "L2",
+        "msg": "Recompute: 455.5/800 in 0.9ms (124 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:31.753Z",
+        "level": "L2",
+        "msg": "Recompute: 463.8/800 in 0.6ms (125 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:33.118Z",
+        "level": "L2",
+        "msg": "Recompute: 472.2/800 in 0.2ms (125 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:34.218Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.5ms (125 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:35.188Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.5ms (125 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:38.037Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.4ms (125 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:38.954Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.6ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:39.767Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:40.673Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:35:41.447Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:32.814Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.6ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:36.342Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:39.633Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:42.631Z",
+        "level": "L2",
+        "msg": "Recompute: 487.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:46.690Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:50.123Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:54.043Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:36:58.799Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:01.996Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:04.981Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:09.199Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:13.254Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:16.201Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:22.078Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:25.237Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:28.413Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:31.688Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:38.024Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:41.576Z",
+        "level": "L2",
+        "msg": "Recompute: 527.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:47.492Z",
+        "level": "L2",
+        "msg": "Recompute: 547.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:50.582Z",
+        "level": "L2",
+        "msg": "Recompute: 547.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:51.272Z",
+        "level": "L2",
+        "msg": "Recompute: 547.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:55.901Z",
+        "level": "L2",
+        "msg": "Recompute: 547.5/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:37:58.811Z",
+        "level": "L2",
+        "msg": "Recompute: 550.6/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:01.761Z",
+        "level": "L2",
+        "msg": "Recompute: 553.8/800 in 0.3ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:05.178Z",
+        "level": "L2",
+        "msg": "Recompute: 553.8/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:09.685Z",
+        "level": "L2",
+        "msg": "Recompute: 553.8/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:13.621Z",
+        "level": "L2",
+        "msg": "Recompute: 556.9/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:17.631Z",
+        "level": "L2",
+        "msg": "Recompute: 560.0/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:20.951Z",
+        "level": "L2",
+        "msg": "Recompute: 560.0/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:24.232Z",
+        "level": "L2",
+        "msg": "Recompute: 560.0/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:26.972Z",
+        "level": "L2",
+        "msg": "Recompute: 563.1/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:30.851Z",
+        "level": "L2",
+        "msg": "Recompute: 566.3/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:33.743Z",
+        "level": "L2",
+        "msg": "Recompute: 566.3/800 in 0.6ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:37.592Z",
+        "level": "L2",
+        "msg": "Recompute: 566.3/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:40.301Z",
+        "level": "L2",
+        "msg": "Recompute: 569.4/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:42.971Z",
+        "level": "L2",
+        "msg": "Recompute: 572.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:38:45.920Z",
+        "level": "L2",
+        "msg": "Recompute: 572.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:01.484Z",
+        "level": "L2",
+        "msg": "Recompute: 577.5/800 in 1.2ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:09.955Z",
+        "level": "L2",
+        "msg": "Recompute: 582.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:13.948Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:16.888Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:19.069Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:20.019Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.4ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:21.188Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.5ms (126 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:22.524Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.3ms (127 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:23.522Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.6ms (128 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:29.481Z",
+        "level": "L2",
+        "msg": "Recompute: 587.5/800 in 0.3ms (129 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:31.364Z",
+        "level": "L2",
+        "msg": "Recompute: 594.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:41.601Z",
+        "level": "L2",
+        "msg": "Recompute: 609.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:45.410Z",
+        "level": "L2",
+        "msg": "Recompute: 609.5/800 in 0.2ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:48.785Z",
+        "level": "L2",
+        "msg": "Recompute: 609.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:52.860Z",
+        "level": "L2",
+        "msg": "Recompute: 621.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:55.493Z",
+        "level": "L2",
+        "msg": "Recompute: 629.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:42:59.090Z",
+        "level": "L2",
+        "msg": "Recompute: 629.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:02.876Z",
+        "level": "L2",
+        "msg": "Recompute: 641.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:05.378Z",
+        "level": "L2",
+        "msg": "Recompute: 649.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:09.575Z",
+        "level": "L2",
+        "msg": "Recompute: 649.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:13.826Z",
+        "level": "L2",
+        "msg": "Recompute: 661.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:16.812Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:19.850Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:23.673Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:24.627Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:25.495Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:26.829Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:27.927Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:29.184Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:31.955Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:34.287Z",
+        "level": "L2",
+        "msg": "Recompute: 669.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:43:53.397Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:23.617Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 1.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:28.252Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:29.488Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:30.242Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:31.210Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:33.460Z",
+        "level": "L2",
+        "msg": "Recompute: 679.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:36.151Z",
+        "level": "L2",
+        "msg": "Recompute: 685.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:39.697Z",
+        "level": "L2",
+        "msg": "Recompute: 693.0/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:41.243Z",
+        "level": "L2",
+        "msg": "Recompute: 693.0/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:42.932Z",
+        "level": "L2",
+        "msg": "Recompute: 693.0/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:48.123Z",
+        "level": "L2",
+        "msg": "Recompute: 693.0/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:44:53.263Z",
+        "level": "L2",
+        "msg": "Recompute: 693.0/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:02.038Z",
+        "level": "L2",
+        "msg": "Recompute: 703.0/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:05.581Z",
+        "level": "L2",
+        "msg": "Recompute: 703.0/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:08.438Z",
+        "level": "L2",
+        "msg": "Recompute: 703.0/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:11.749Z",
+        "level": "L2",
+        "msg": "Recompute: 709.0/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:16.363Z",
+        "level": "L2",
+        "msg": "Recompute: 716.5/800 in 0.8ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:19.323Z",
+        "level": "L2",
+        "msg": "Recompute: 716.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:21.836Z",
+        "level": "L2",
+        "msg": "Recompute: 721.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:28.101Z",
+        "level": "L2",
+        "msg": "Recompute: 721.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:28.876Z",
+        "level": "L2",
+        "msg": "Recompute: 731.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:31.381Z",
+        "level": "L2",
+        "msg": "Recompute: 731.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:33.726Z",
+        "level": "L2",
+        "msg": "Recompute: 737.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:37.022Z",
+        "level": "L2",
+        "msg": "Recompute: 745.0/800 in 1.2ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:39.630Z",
+        "level": "L2",
+        "msg": "Recompute: 745.0/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:42.602Z",
+        "level": "L2",
+        "msg": "Recompute: 745.0/800 in 0.7ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:45.932Z",
+        "level": "L2",
+        "msg": "Recompute: 755.0/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:49.045Z",
+        "level": "L2",
+        "msg": "Recompute: 755.0/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:51.514Z",
+        "level": "L2",
+        "msg": "Recompute: 755.0/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:54.218Z",
+        "level": "L2",
+        "msg": "Recompute: 761.0/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:45:57.667Z",
+        "level": "L2",
+        "msg": "Recompute: 768.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:00.695Z",
+        "level": "L2",
+        "msg": "Recompute: 768.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:04.134Z",
+        "level": "L2",
+        "msg": "Recompute: 768.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:12.349Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:16.162Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:25.913Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:26.303Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:27.245Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.7ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:28.423Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:28.968Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:29.943Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:31.986Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:46:58.758Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.7ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:02.072Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:05.382Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.9ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:11.775Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:16.216Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:16.781Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:23.012Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:27.313Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:33.485Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:36.096Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:38.403Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:45.191Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:48.510Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:47:51.279Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:07.846Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:12.270Z",
+        "level": "L2",
+        "msg": "Recompute: 769.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:15.916Z",
+        "level": "L2",
+        "msg": "Recompute: 779.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:33.512Z",
+        "level": "L2",
+        "msg": "Recompute: 779.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:37.806Z",
+        "level": "L2",
+        "msg": "Recompute: 779.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:41.495Z",
+        "level": "L2",
+        "msg": "Recompute: 779.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:48:45.894Z",
+        "level": "L2",
+        "msg": "Recompute: 779.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:50:58.884Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.9ms (130 steps)",
+        "ctx": {
+          "trigger": "r9_proof_one"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:17.501Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.9ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:22.296Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.7ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:27.583Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:30.478Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:33.766Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:36.608Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:45.996Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:48.819Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:52:51.385Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:17.338Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:17.893Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:24.017Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.8ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:28.630Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:30.182Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:36.864Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:52.371Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:53.036Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:53.559Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:56.824Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:53:59.840Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:00.969Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.2ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:03.771Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:08.070Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:11.919Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:14.589Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:15.398Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:19.076Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:22.150Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:24.874Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:26.657Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:29.129Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:31.758Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.3ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:34.869Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.6ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:45.859Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:49.036Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.7ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:54:56.537Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:01.043Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.5ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:03.773Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:04.331Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:04.743Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:05.388Z",
+        "level": "L2",
+        "msg": "Recompute: 794.5/800 in 0.4ms (130 steps)",
+        "ctx": {
+          "trigger": "user"
+        }
+      },
+      {
+        "ts": "2026-05-05T09:55:31.308Z",
+        "level": "L2",
+        "msg": "Proposal exported (HTML)",
+        "ctx": {}
+      }
+    ],
+    "changeLog": [
+      {
+        "ts": "2026-05-05T09:38:13.355Z",
+        "path": "sessionSteps[1].name",
+        "newVal": "Module Selection & Initial Rooms",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:17.366Z",
+        "path": "sessionSteps[1].description",
+        "newVal": "Player surveys the map showing all modules with difficulty indicators (Easy/Medium/Hard). They choose an unlocked module (e.g., Linear Search or Binary Search) and enter.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:20.697Z",
+        "path": "sessionSteps[1].duration",
+        "newVal": "1–2 minutes",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:23.980Z",
+        "path": "sessionSteps[2].seq",
+        "newVal": "3",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:26.708Z",
+        "path": "sessionSteps[2].name",
+        "newVal": "In‑Room Algorithm Diagnosis",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:30.587Z",
+        "path": "sessionSteps[2].description",
+        "newVal": "Player interacts with the simulation (predict steps, drag swaps, select pivots, merge, etc.), receives immediate feedback, and either succeeds or retries. This repeats across multiple rooms.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:33.484Z",
+        "path": "sessionSteps[2].duration",
+        "newVal": "3–5 minutes per room × number of rooms played in session",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:37.329Z",
+        "path": "sessionSteps[3].seq",
+        "newVal": "4",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:40.038Z",
+        "path": "sessionSteps[3].name",
+        "newVal": "Progression & Ranking Up",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:42.707Z",
+        "path": "sessionSteps[3].description",
+        "newVal": "After accumulating enough XP, player sees rank‑up animation (Recruit → Analyst → Engineer, etc.), reviews activity log, and either continues to harder modules or exits to map. Session ends when player stops or completes all nine rooms.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:38:45.666Z",
+        "path": "sessionSteps[3].duration",
+        "newVal": "1–2 minutes (per rank event) + variable playtime",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:01.226Z",
+        "path": "rewardStructure.access",
+        "newVal": "Upon completing the first two modules (Linear Search and Binary Search) and reaching 50 XP, the player unlocks the ANALYST rank. Reward includes: permanent access to the Complexity Profiler room, a visual badge on the map screen, and a one‑time XP boost of +10 XP. All future playthroughs retain the rank title.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:09.692Z",
+        "path": "rewardStructure.professional",
+        "newVal": "Upon clearing 6 modules and reaching 250 XP, the player achieves ARCHITECT rank. Reward includes: unlock of all Hard‑difficulty rooms (Quicksort Pivot, Graph BFS, Complexity Race), a unique “Architect” map theme border, and the ability to see predicted complexity hints before making choices in any room (tooltip enhancement). No real‑money value — purely in‑game status and functional advantage.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:13.691Z",
+        "path": "rewardStructure.elite",
+        "newVal": "Upon clearing all 9 modules and reaching 600 XP, the player attains PRINCIPAL rank — the highest diagnostic authority. Reward includes: a permanent “System Restored” certificate screen, an infinite replay mode where the player can race against their own best integrity score per room, and a shareable completion code (no PII) that instructors can verify for course credit. The player’s name (optional) is inscribed on an in‑game leaderboard of principals (local only, no external tracking).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:16.630Z",
+        "path": "kpis[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:18.812Z",
+        "path": "kpis[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:19.765Z",
+        "path": "kpis[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:20.933Z",
+        "path": "kpis[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:22.272Z",
+        "path": "kpis[0].level",
+        "newVal": "L1",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:23.270Z",
+        "path": "kpis[1].level",
+        "newVal": "L2",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:29.230Z",
+        "path": "kpis[3].level",
+        "newVal": "L4",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:31.110Z",
+        "path": "kpis[2].level",
+        "newVal": "L3",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:41.337Z",
+        "path": "kpis[0].metric",
+        "newVal": "Average user satisfaction rating (1–5) for “I enjoyed diagnosing algorithm inefficiencies”",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:45.158Z",
+        "path": "kpis[0].method",
+        "newVal": "Post‑session optional survey (Likert scale) embedded on map screen after 3 modules cleared",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:48.528Z",
+        "path": "kpis[0].target",
+        "newVal": "≥4.2 / 5.0 from at least 30 unique players",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:52.594Z",
+        "path": "kpis[1].metric",
+        "newVal": "Percentage of players who correctly identify the complexity class (O(n) vs O(log n) vs O(n²)) in all prediction challenges across the first 3 rooms",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:55.231Z",
+        "path": "kpis[1].method",
+        "newVal": "In‑game tracking of prediction choices compared to correct answers (logged automatically)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:58.836Z",
+        "path": "kpis[1].target",
+        "newVal": "≥75% accuracy on first attempt for each of the first 3 rooms",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:02.614Z",
+        "path": "kpis[2].metric",
+        "newVal": "Reduction in average number of integrity‑damaging mistakes per module from first to second playthrough of the same room",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:05.113Z",
+        "path": "kpis[2].method",
+        "newVal": "Compare damage() event counts per module between session 1 and session 2 (local storage resettable by user)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:09.316Z",
+        "path": "kpis[2].target",
+        "newVal": "≥40% fewer mistakes on second attempt for Bubble Sort and Quicksort Pivot rooms",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:13.560Z",
+        "path": "kpis[3].metric",
+        "newVal": "Percentage of players who achieve at least ENGINEER rank (120 XP) and voluntarily complete the Complexity Race room",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:16.548Z",
+        "path": "kpis[3].method",
+        "newVal": "Track maximum XP and room completion flags in browser storage; aggregate anonymously via optional export (no PII)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:19.587Z",
+        "path": "kpis[3].target",
+        "newVal": " ≥60% of players who start the Race room reach Engineer rank within the same session",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:23.417Z",
+        "path": "tuslerRisks[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:24.372Z",
+        "path": "tuslerRisks[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:25.239Z",
+        "path": "tuslerRisks[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:26.573Z",
+        "path": "tuslerRisks[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:27.672Z",
+        "path": "supportTeam[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:28.932Z",
+        "path": "supportTeam[+]",
+        "oldVal": null,
+        "newVal": {},
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:30.478Z",
+        "path": "supportTeam[0].name",
+        "newVal": "G",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:30.647Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "G",
+        "newVal": "Gö",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:30.863Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Gö",
+        "newVal": "Gök",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.002Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Gök",
+        "newVal": "Gökt",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.078Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Gökt",
+        "newVal": "Göktu",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.286Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Göktu",
+        "newVal": "Göktuğ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.362Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Göktuğ",
+        "newVal": "Göktuğ ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.472Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Göktuğ ",
+        "newVal": "Göktuğ D",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.620Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Göktuğ D",
+        "newVal": "Göktuğ Da",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:31.701Z",
+        "path": "supportTeam[0].name",
+        "oldVal": "Göktuğ Da",
+        "newVal": "Göktuğ Dal",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.029Z",
+        "path": "supportTeam[1].name",
+        "newVal": "E",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.215Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "E",
+        "newVal": "Eg",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.296Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Eg",
+        "newVal": "Ege",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.435Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege",
+        "newVal": "Ege ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.578Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege ",
+        "newVal": "Ege L",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.759Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege L",
+        "newVal": "Ege Lü",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.842Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege Lü",
+        "newVal": "Ege Lüt",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:33.977Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege Lüt",
+        "newVal": "Ege Lütf",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:34.023Z",
+        "path": "supportTeam[1].name",
+        "oldVal": "Ege Lütf",
+        "newVal": "Ege Lütfi",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:53.142Z",
+        "path": "tuslerRisks[0].category",
+        "newVal": "Kitten",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:22.874Z",
+        "path": "tuslerRisks[0].id",
+        "newVal": "R",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:23.017Z",
+        "path": "tuslerRisks[0].id",
+        "oldVal": "R",
+        "newVal": "R-",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:23.244Z",
+        "path": "tuslerRisks[0].id",
+        "oldVal": "R-",
+        "newVal": "R-0",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:23.353Z",
+        "path": "tuslerRisks[0].id",
+        "oldVal": "R-0",
+        "newVal": "R-01",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:27.773Z",
+        "path": "tuslerRisks[0].prob",
+        "newVal": "L",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:27.908Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "L",
+        "newVal": "LO",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:27.998Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LO",
+        "newVal": "LOW",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:28.871Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LOW",
+        "newVal": "LO",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:29.007Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LO",
+        "newVal": "L",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:29.073Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "L",
+        "newVal": "LO",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:29.229Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LO",
+        "newVal": "LOw",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:29.830Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LOw",
+        "newVal": "LO",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:29.975Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "LO",
+        "newVal": "L",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:30.916Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "L",
+        "newVal": "",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:33.198Z",
+        "path": "tuslerRisks[0].prob",
+        "oldVal": "",
+        "newVal": "Medium (40%)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:35.890Z",
+        "path": "tuslerRisks[0].impact",
+        "newVal": "High",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:39.443Z",
+        "path": "tuslerRisks[0].mitigation",
+        "newVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release (≥25 chars).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:40.989Z",
+        "path": "tuslerRisks[0].mitigation",
+        "oldVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release (≥25 chars).",
+        "newVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:42.677Z",
+        "path": "tuslerRisks[0].mitigation",
+        "oldVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release",
+        "newVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:47.857Z",
+        "path": "tuslerRisks[0].preventive",
+        "newVal": "Use feature detection + fallback buttons for drag‑drop.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:53.011Z",
+        "path": "tuslerRisks[0].responsive",
+        "newVal": " Deploy hotfix within 24 hours; notify users to refresh.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:01.787Z",
+        "path": "tuslerRisks[1].category",
+        "newVal": "Puppy",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:05.316Z",
+        "path": "tuslerRisks[1].id",
+        "newVal": "R-02",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:08.174Z",
+        "path": "tuslerRisks[1].prob",
+        "newVal": " Low (20%)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:11.490Z",
+        "path": "tuslerRisks[1].impact",
+        "newVal": "Medium",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:16.097Z",
+        "path": "tuslerRisks[1].mitigation",
+        "newVal": "Add tooltips and example animations for first‑time players in each room",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:19.061Z",
+        "path": "tuslerRisks[1].preventive",
+        "newVal": "Conduct usability test with 5 students before launch.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:21.572Z",
+        "path": "tuslerRisks[1].responsive",
+        "newVal": "Release in‑game “hint” button via update.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:27.848Z",
+        "path": "tuslerRisks[2].id",
+        "newVal": "R-03",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:28.615Z",
+        "path": "tuslerRisks[2].category",
+        "newVal": "Alligator",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:31.117Z",
+        "path": "tuslerRisks[2].prob",
+        "newVal": "Medium (50%)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:33.459Z",
+        "path": "tuslerRisks[2].impact",
+        "newVal": "Medium",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:36.758Z",
+        "path": "tuslerRisks[2].mitigation",
+        "newVal": "Provide optional “hide complexity hints” toggle in settings",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:39.366Z",
+        "path": "tuslerRisks[2].preventive",
+        "newVal": "Run A/B test with two versions before final release.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:42.339Z",
+        "path": "tuslerRisks[2].responsive",
+        "newVal": "Add toggle based on user feedback within 1 week.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:45.676Z",
+        "path": "tuslerRisks[3].category",
+        "newVal": "Tiger",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:48.783Z",
+        "path": "tuslerRisks[3].id",
+        "newVal": "R-04",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:51.251Z",
+        "path": "tuslerRisks[3].prob",
+        "newVal": "Low (15%)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:53.954Z",
+        "path": "tuslerRisks[3].impact",
+        "newVal": "High",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:57.402Z",
+        "path": "tuslerRisks[3].mitigation",
+        "newVal": "mplement simple module unlock logic before final submission",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:00.433Z",
+        "path": "tuslerRisks[3].preventive",
+        "newVal": "Map requirements to rubric and demo to teacher early.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:03.882Z",
+        "path": "tuslerRisks[3].responsive",
+        "newVal": "Submit revised version with unlock feature within 2 days.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:12.094Z",
+        "path": "facilitatorRole",
+        "oldVal": "",
+        "newVal": "The facilitator guides players through the diagnostic narrative, explains mechanics on first launch, and provides contextual hints when integrity drops below 30% — without showing answers.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:14.687Z",
+        "path": "supportTeam[0].role",
+        "newVal": "T",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:14.876Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "T",
+        "newVal": "Te",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:14.926Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Te",
+        "newVal": "Tea",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.087Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Tea",
+        "newVal": "Team",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.182Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team",
+        "newVal": "Team ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.315Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team ",
+        "newVal": "Team L",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.461Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team L",
+        "newVal": "Team Le",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.551Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team Le",
+        "newVal": "Team Lea",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.689Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team Lea",
+        "newVal": "Team Lead",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.812Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team Lead",
+        "newVal": "Team Leade",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:15.902Z",
+        "path": "supportTeam[0].role",
+        "oldVal": "Team Leade",
+        "newVal": "Team Leader",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:25.404Z",
+        "path": "supportTeam[1].role",
+        "newVal": "F",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:25.654Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "F",
+        "newVal": "Fr",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.049Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "Fr",
+        "newVal": "Fro",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.406Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "Fro",
+        "newVal": "Fron",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.479Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "Fron",
+        "newVal": "Front",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.695Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "Front",
+        "newVal": "FrontE",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.914Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontE",
+        "newVal": "FrontEn",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:26.981Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEn",
+        "newVal": "FrontEnd",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:28.162Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd",
+        "newVal": "FrontEnd ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:28.460Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd ",
+        "newVal": "FrontEnd D",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:28.575Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd D",
+        "newVal": "FrontEnd DE",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:28.707Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd DE",
+        "newVal": "FrontEnd DEV",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:29.394Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd DEV",
+        "newVal": "FrontEnd DE",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:29.506Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd DE",
+        "newVal": "FrontEnd D",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:29.630Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd D",
+        "newVal": "FrontEnd De",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:29.676Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd De",
+        "newVal": "FrontEnd Dev",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.141Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Dev",
+        "newVal": "FrontEnd Deve",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.271Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Deve",
+        "newVal": "FrontEnd Devel",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.422Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Devel",
+        "newVal": "FrontEnd Develo",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.556Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Develo",
+        "newVal": "FrontEnd Develop",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.639Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Develop",
+        "newVal": "FrontEnd Develope",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:31.720Z",
+        "path": "supportTeam[1].role",
+        "oldVal": "FrontEnd Develope",
+        "newVal": "FrontEnd Developer",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:58.492Z",
+        "path": "tuslerRisks[0].mitigation",
+        "oldVal": "Test drag‑drop and timer on Chrome, Firefox, Edge before release.",
+        "newVal": "Thoroughly test drag‑drop, timer strip, and all prediction interfaces on Chrome, Firefox, and Edge before each release cycle to ensure cross‑browser compatibility. ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:01.808Z",
+        "path": "tuslerRisks[0].preventive",
+        "oldVal": "Use feature detection + fallback buttons for drag‑drop.",
+        "newVal": "Use feature detection with a graceful fallback to button‑based controls for older browsers that lack full drag‑drop support.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:05.119Z",
+        "path": "tuslerRisks[0].responsive",
+        "oldVal": " Deploy hotfix within 24 hours; notify users to refresh.",
+        "newVal": "Deploy a hotfix within 24 hours of detecting the issue and notify all active users via an in‑game message to refresh their browser.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:11.512Z",
+        "path": "tuslerRisks[1].mitigation",
+        "oldVal": "Add tooltips and example animations for first‑time players in each room",
+        "newVal": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers. (≥108 chars)",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:15.960Z",
+        "path": "tuslerRisks[1].mitigation",
+        "oldVal": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers. (≥108 chars)",
+        "newVal": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:16.527Z",
+        "path": "tuslerRisks[1].mitigation",
+        "oldVal": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers",
+        "newVal": "Add contextual tooltips and short animated demonstrations for first‑time players entering each room, explaining the core interaction pattern without revealing answers.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:22.747Z",
+        "path": "tuslerRisks[1].preventive",
+        "oldVal": "Conduct usability test with 5 students before launch.",
+        "newVal": "Conduct a usability test with at least five target students before launch to identify confusing instructions or UI elements.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:27.048Z",
+        "path": "tuslerRisks[1].responsive",
+        "oldVal": "Release in‑game “hint” button via update.",
+        "newVal": "Release an in‑game “Hint” button dynamically for the specific room where players report getting stuck, via a serverless update.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:33.224Z",
+        "path": "tuslerRisks[2].mitigation",
+        "oldVal": "Provide optional “hide complexity hints” toggle in settings",
+        "newVal": "Provide an optional “Hide Complexity Hints” toggle inside the settings panel, allowing players to choose between explicit Big‑O labels or purely subconscious operation‑based learning. ",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:35.833Z",
+        "path": "tuslerRisks[2].preventive",
+        "oldVal": "Run A/B test with two versions before final release.",
+        "newVal": "Run an A/B test with two separate versions of the first three rooms before final release to measure which approach yields better learning outcomes.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:38.150Z",
+        "path": "tuslerRisks[2].responsive",
+        "oldVal": "Add toggle based on user feedback within 1 week.",
+        "newVal": "Add the toggle control based on aggregated user feedback within one week of launch, and default it to the preferred mode.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:44.935Z",
+        "path": "tuslerRisks[3].mitigation",
+        "oldVal": "mplement simple module unlock logic before final submission",
+        "newVal": "Implement a simple but robust module unlock logic that checks cleared room count before allowing entry to medium‑difficulty (≥2 clears) and hard rooms (≥5 clears).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:48.248Z",
+        "path": "tuslerRisks[3].preventive",
+        "oldVal": "Map requirements to rubric and demo to teacher early.",
+        "newVal": "Map every rubric requirement for progression to a checklist and demo the working unlock system to the teacher at least one week before final submission.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:47:51.012Z",
+        "path": "tuslerRisks[3].responsive",
+        "oldVal": "Submit revised version with unlock feature within 2 days.",
+        "newVal": "Submit a revised version of the HTML/JS file with the unlock feature fully implemented within two days of receiving the teacher’s feedback request.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:07.582Z",
+        "path": "wf_dash",
+        "oldVal": "",
+        "newVal": "The dashboard (map screen) shows a top bar with score, XP, and rank, a central story panel with briefing text, and a responsive grid of nine room cards. Each card displays icon, title, algorithm name, Big‑O, threat summary, difficulty dots, and a status badge (ISSUE/RESOLVED). Clicking an unresolved room launches its diagnostic simulation.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:12.005Z",
+        "path": "wf_asset",
+        "oldVal": "",
+        "newVal": "The asset wireframe represents a single interactive algorithm node as a square card. Inside: numeric value at center, index label below, colored border indicating state (searching, sorted, pivot, dead), and drag handle. Nodes arrange horizontally in a flexible row, with comparison lines or adjacency highlights shown via background color and shadow animations.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:15.650Z",
+        "path": "wf_portfolio",
+        "oldVal": "",
+        "newVal": "The portfolio (activity log + complexity panel) sits as a right sidebar. Upper section shows live complexity bars with labeled metrics (comparisons, swaps, sorted count). Lower section scrolls timestamped log entries with color‑coded borders (green for correct, red for error, yellow for warning). Bottom area displays total operations count.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:33.255Z",
+        "path": "inScope",
+        "oldVal": "",
+        "newVal": "All in‑game mistakes (wrong predictions, incorrect swaps, bad pivot choices, out‑of‑order BFS visits) result in system integrity loss and explanatory feedback, but no deduction of accumulated XP, score, or rank progress — i.e., losePoints=0. Players can retry any room without permanent punitive damage to their overall achievement record. The only reset is per‑room integrity, and only when integrity hits zero does the room restart (still no point loss).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:37.544Z",
+        "path": "outScope",
+        "oldVal": "",
+        "newVal": "No tracking or storage of personally identifiable information (PII)\n\nNo real‑time competitive leaderboards vs other players\n\nNo mandatory account creation or login\n\nNo monetization, ads, or microtransactions\n\nNo external server‑side data collection (all progress stays in browser localStorage)\n\nNo punitive removal of earned ranks or badges due to mistakes",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:41.242Z",
+        "path": "whyMotivation",
+        "oldVal": "",
+        "newVal": "We want players to experiment, fail safely, and learn from mistakes without fear of permanent loss. Punishing errors by deducting points or XP would discourage trial‑and‑error, which is essential for mastering algorithm complexity. The compassion model aligns with Self‑Determination Theory’s competence support — players build mastery through repeated attempts without anxiety about losing what they’ve already earned.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:45.642Z",
+        "path": "howEthics",
+        "oldVal": "",
+        "newVal": "Implemented by design: the damage() function reduces G.integrity but never touches G.score or G.xp. XP is awarded only on successful completion (award() function). Integrity resets to 100% upon room restart. All feedback messages explain why an action was wrong, not just that it was wrong. No deceptive patterns, no dark patterns, no forced progression — players can stop anytime and resume later with progress intact.\n\n",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:50:58.879Z",
+        "path": "theories",
+        "oldVal": null,
+        "newVal": [
+          "sdt",
+          "mda",
+          "flow",
+          "bloom",
+          "kirkpatrick",
+          "sdt",
+          "mda",
+          "bloom",
+          "hexad",
+          "kirkpatrick"
+        ],
+        "source": "r9_proof_one"
+      },
+      {
+        "ts": "2026-05-05T09:50:58.880Z",
+        "path": "narrativeTheme",
+        "oldVal": null,
+        "newVal": "A boutique software house has lost three project deliveries in a row to an unidentified internal saboteur. As the new project team, you arrive to discover that some of your colleagues have been secretly working against the project — these are the Vampires (hidden-agenda stakeholders). The Doctor among you holds an ancient rite that can reveal one Vampire per round — a rite drawn from the Self-Determination Theory grimoire of autonomy, competence, and relatedness. Your mission, framed by the Mechanics-Dynamics-Aesthetics design lens and assessed across all four tiers of Kirkpatrick four-level evaluation and the six cognitive ranks of Bloom Taxonomy, is to identify and neutralise the Vampires before they outnumber the Villagers — applying HEXAD player archetypes (Achiever, Disruptor, Free Spirit, Philanthropist, Player, Socialiser) to balance team strategy. Each round teaches a different facet of stakeholder management, communication under uncertainty, and risk response — making this gamification proposal a comprehensive integration of pedagogical theory and PMBOK practice.",
+        "source": "r9_proof_one"
+      },
+      {
+        "ts": "2026-05-05T09:52:17.249Z",
+        "path": "mechanics[0]",
+        "oldVal": "Diagnostic narrative immersion",
+        "newVal": "The player is cast as an Algorithm Specialist saving a failing system, with each module having its own mini‑story.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:22.031Z",
+        "path": "mechanics[1]",
+        "oldVal": "System integrity meter (health bar)",
+        "newVal": " A visible bar that decreases with algorithmic mistakes, teaching consequences without deducting points.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:27.316Z",
+        "path": "mechanics[2]",
+        "oldVal": "Prediction challenges before algorithm execution",
+        "newVal": "Players forecast operation counts or complexity classes, then run the algorithm to see if they were right.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:30.221Z",
+        "path": "mechanics[3]",
+        "oldVal": "Visual timer strip representing time complexity",
+        "newVal": "A color‑changing bar that adds gentle urgency and illustrates how slower algorithms “take more time.”",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:33.501Z",
+        "path": "mechanics[4]",
+        "oldVal": "Activity log for mistake tracking and review",
+        "newVal": "Every comparison, swap, and prediction is recorded with color coding, allowing self‑audit and learning from errors.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:36.345Z",
+        "path": "mechanics[5]",
+        "oldVal": "Module map with visual cleared status",
+        "newVal": "A grid showing which rooms are resolved (green) and which still have issues (red), giving a clear sense of progress.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:45.732Z",
+        "path": "mdaAnalysis.aesthetics",
+        "oldVal": "Emotional responses: Challenge (solving each algorithm deficit), Mastery (seeing rank increase from Recruit to Principal), Discovery (realizing why O(n²) fails at scale in the Race room), Sensation (smooth drag/drop, pulse animations on nodes), Narrative (system diagnostic specialist restoring order).",
+        "newVal": "The emotional responses evoked are: Challenge (solving each algorithm deficit), Mastery (seeing rank climb from Recruit to Principal), Discovery (understanding why O(n²) fails at large scale in the Race room), Sensation (enjoying smooth drag/drop and pulse animations on nodes), and Narrative (feeling like a system diagnostic specialist restoring order).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:48.554Z",
+        "path": "mdaAnalysis.dynamics",
+        "oldVal": "Emergent behaviors from mechanics: as integrity drops, player rushes predictions and may make more errors; streak bonuses encourage correct chains; players explore module order based on perceived difficulty; ranking up provides motivation to revisit failed rooms; unexpected pivot outcomes cause re‑evaluation.\n\n",
+        "newVal": "As integrity drops, players rush predictions and often make more mistakes. Streak bonuses encourage chains of correct answers. Players naturally explore modules in an order that matches their perceived difficulty. Ranking up motivates them to revisit previously failed rooms, and unexpected pivot outcomes force re‑evaluation of strategy.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:52:51.128Z",
+        "path": "mdaAnalysis.mechanics",
+        "oldVal": "The rules and affordances: drag‑and‑drop for sorting, prediction buttons before execution, click‑to‑choose pivot, binary search midpoint selection, timer strip for urgency, integrity meter as health, log panel for audit, module map with cleared status, XP float animations.",
+        "newVal": "The system’s core rules and interactions include: drag‑and‑drop for sorting, prediction buttons before execution, click‑to‑choose pivot, binary search midpoint selection, a timer strip for urgency, an integrity meter as health, an activity log for auditing, a module map with cleared status, and XP float animations.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:17.084Z",
+        "path": "bloomOutcomes[0].bloom_k",
+        "oldVal": null,
+        "newVal": "1",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:17.642Z",
+        "path": "bloomOutcomes[0].outcome",
+        "oldVal": "Recall the definition and notation of five common complexity classes (O(1), O(log n), O(n), O(n log n), O(n²)).",
+        "newVal": "Remember the names and Big‑O notations of five essential complexity classes: O(1), O(log n), O(n), O(n log n), O(n²).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:23.765Z",
+        "path": "bloomOutcomes[0].activity",
+        "oldVal": "Match each algorithm name (Linear Search, Binary Search, Bubble Sort, Merge Sort, constant time) to its correct Big-O class.",
+        "newVal": "Pair each algorithm (Linear Search, Binary Search, Bubble Sort, Merge Sort, constant‑time operation) with its matching complexity class.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:28.379Z",
+        "path": "bloomOutcomes[0].assessment",
+        "oldVal": "80% correct matches in the Complexity Profiler room (Classify) before proceeding.",
+        "newVal": "Achieve at least 80% accuracy on matching tasks inside the Complexity Profiler room before moving forward.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:29.930Z",
+        "path": "bloomOutcomes[1].bloom_k",
+        "oldVal": null,
+        "newVal": "2",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:36.601Z",
+        "path": "bloomOutcomes[1].outcome",
+        "oldVal": "Explain why a sorted array enables logarithmic search while an unsorted array forces linear scan.",
+        "newVal": "Describe why a pre‑sorted array makes logarithmic search possible while an unsorted array forces linear scanning.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:52.116Z",
+        "path": "bloomOutcomes[4].outcome",
+        "oldVal": "Evaluate the impact of pivot selection on Quicksort’s performance for sorted input, choosing a pivot that yields balanced partitions.",
+        "newVal": "Judge how pivot selection affects Quicksort’s performance on sorted input, and pick a pivot that produces balanced partitions.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:52.775Z",
+        "path": "bloomOutcomes[4].bloom_k",
+        "oldVal": null,
+        "newVal": "NaNa",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:53.302Z",
+        "path": "bloomOutcomes[4].bloom_k",
+        "oldVal": null,
+        "newVal": "5",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:56.560Z",
+        "path": "bloomOutcomes[4].activity",
+        "oldVal": "In the Quicksort Pivot room, the student must click on a pivot element (not the first) to achieve O(n log n) instead of O(n²).",
+        "newVal": " In the Quicksort Pivot room, the student must click on a pivot element that is not the first element, achieving O(n log n) instead of O(n²).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:53:59.582Z",
+        "path": "bloomOutcomes[4].assessment",
+        "oldVal": "Successfully select a non‑extreme pivot (e.g., median) that creates both left and right partitions.",
+        "newVal": "Choose a non‑extreme pivot (for example, a median value) that splits the array into both non‑empty left and right partitions.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:00.717Z",
+        "path": "bloomOutcomes[5].bloom_k",
+        "oldVal": null,
+        "newVal": "6",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:03.509Z",
+        "path": "bloomOutcomes[5].outcome",
+        "oldVal": "Design a correct merge sequence for two sorted lists by always selecting the smaller head element, producing a fully merged sorted output.",
+        "newVal": "Construct a correct merge sequence for two sorted lists by always taking the smaller head element, resulting in a fully merged sorted output.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:07.808Z",
+        "path": "bloomOutcomes[5].activity",
+        "oldVal": "In the Genome Merger room, the student must explicitly choose “LEFT” or “RIGHT” at each step to merge three pairs of sorted arrays without help.",
+        "newVal": " Inside the Genome Merger room, the student must explicitly click “LEFT” or “RIGHT” at each step to merge three pairs of sorted arrays without any assistance.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:11.654Z",
+        "path": "bloomOutcomes[5].assessment",
+        "oldVal": "Merge all elements correctly on the first attempt (no corruption penalty).",
+        "newVal": "Merge every element correctly on the first try, receiving no corruption penalty.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:14.322Z",
+        "path": "bloomOutcomes[3].bloom_k",
+        "oldVal": null,
+        "newVal": "5",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:15.142Z",
+        "path": "bloomOutcomes[3].bloom_k",
+        "oldVal": 5,
+        "newVal": "4",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:18.814Z",
+        "path": "bloomOutcomes[3].outcome",
+        "oldVal": "Analyze an execution trace of Bubble Sort and identify unnecessary comparisons or swaps that increase total operations.",
+        "newVal": "Examine a Bubble Sort execution trace to spot unnecessary comparisons or swaps that drive up total operations.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:21.884Z",
+        "path": "bloomOutcomes[3].activity",
+        "oldVal": "In Bubble Sort room, drag‑and‑swap only when left > right; if the student swaps an already‑ordered pair, they receive a warning and integrity decreases – they must analyze why it was wrong.",
+        "newVal": "In the Bubble Sort room, drag and swap adjacent elements only when the left value exceeds the right value. If the student swaps an already ordered pair, they receive a warning and lose integrity – they must explain why that swap was wasteful.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:24.621Z",
+        "path": "bloomOutcomes[3].assessment",
+        "oldVal": "Complete the Bubble Sort room with ≤2 incorrect swaps (self‑corrected via feedback).",
+        "newVal": "Finish the Bubble Sort room with no more than two incorrect swaps, using in‑game feedback to self‑correct.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:26.390Z",
+        "path": "bloomOutcomes[2].bloom_k",
+        "oldVal": null,
+        "newVal": "3",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:28.865Z",
+        "path": "bloomOutcomes[2].outcome",
+        "oldVal": "Apply the correct search algorithm (linear or binary) given a specific dataset property (sorted or unsorted).",
+        "newVal": "Use either linear or binary search correctly based on whether the dataset is sorted or unsorted.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:31.495Z",
+        "path": "bloomOutcomes[2].activity",
+        "oldVal": "In Linear Search and Binary Search rooms, the student must run the appropriate algorithm to locate a target without being told which to use.",
+        "newVal": "Inside the Linear Search and Binary Search rooms, the student must locate a target using the appropriate algorithm without being told which one to use.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:34.616Z",
+        "path": "bloomOutcomes[2].assessment",
+        "oldVal": "Successfully locate the target in both rooms with ≤10% integrity loss.",
+        "newVal": " Successfully find the target in both rooms while keeping system integrity loss at ≤10%.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:45.606Z",
+        "path": "bloomOutcomes[1].outcome",
+        "oldVal": "Describe why a pre‑sorted array makes logarithmic search possible while an unsorted array forces linear scanning.",
+        "newVal": "Understand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:48.771Z",
+        "path": "bloomOutcomes[1].outcome",
+        "oldVal": "Understand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step.",
+        "newVal": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values are displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:54:56.286Z",
+        "path": "bloomOutcomes[1].assessment",
+        "oldVal": "Explanation includes “halving the range” and “1 million checks vs ~20 checks” – peer or instructor review.",
+        "newVal": "Complete the Binary Search room with zero incorrect midpoint selections (no integrity damage from wrong picks). The in‑game activity log records every midpoint choice, and the final success screen shows the number of steps used vs. the theoretical maximum (log₂(n)).",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:55:00.779Z",
+        "path": "bloomOutcomes[1].activity",
+        "oldVal": "After completing Binary Search room, write a one‑sentence explanation comparing O(log n) vs O(n) for n=1,000,000.",
+        "newVal": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values are displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:55:03.520Z",
+        "path": "bloomOutcomes[1].bloom_k",
+        "oldVal": 2,
+        "newVal": "Understand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:55:04.079Z",
+        "path": "bloomOutcomes[1].bloom_k",
+        "oldVal": null,
+        "newVal": "2",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:55:04.491Z",
+        "path": "bloomOutcomes[1].outcome",
+        "oldVal": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values are displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "newVal": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values areUnderstand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step. displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "source": "user"
+      },
+      {
+        "ts": "2026-05-05T09:55:05.133Z",
+        "path": "bloomOutcomes[1].outcome",
+        "oldVal": "In the Binary Search room (roomBinary), the player must click on the highlighted midpoint element each turn. The current low, high, and midpoint values areUnderstand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step. displayed. Clicking any non‑midpoint node triggers an integrity penalty and an error message explaining why the midpoint is required.",
+        "newVal": "Understand that binary search repeatedly halves the search interval by selecting the exact midpoint at each step.",
+        "source": "user"
+      }
+    ],
+    "lastEvaluation": {
+      "totalScore": 794.5,
+      "dimensionScores": {
+        "D1": {
+          "dim": "D1",
+          "componentSum": 100,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 100,
+          "score": 100,
+          "componentCount": 4
+        },
+        "D2": {
+          "dim": "D2",
+          "componentSum": 100,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 100,
+          "score": 100,
+          "componentCount": 5
+        },
+        "D3": {
+          "dim": "D3",
+          "componentSum": 97,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 97,
+          "score": 97,
+          "componentCount": 4
+        },
+        "D4": {
+          "dim": "D4",
+          "componentSum": 100,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 100,
+          "score": 100,
+          "componentCount": 6
+        },
+        "D5": {
+          "dim": "D5",
+          "componentSum": 97.5,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 97.5,
+          "score": 97.5,
+          "componentCount": 7
+        },
+        "D6": {
+          "dim": "D6",
+          "componentSum": 100,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 100,
+          "score": 100,
+          "componentCount": 4
+        },
+        "D7": {
+          "dim": "D7",
+          "componentSum": 94,
+          "bonus": 10,
+          "penalty": 0,
+          "raw": 104,
+          "score": 100,
+          "componentCount": 3
+        },
+        "D8": {
+          "dim": "D8",
+          "componentSum": 100,
+          "bonus": 0,
+          "penalty": 0,
+          "raw": 100,
+          "score": 100,
+          "componentCount": 5
+        }
+      },
+      "evaluationId": "eval_mosgcp4b",
+      "evaluatedAt": "2026-05-05T09:55:05.388Z",
+      "logCount": 130
+    },
+    "scoreHistory": [
+      {
+        "ts": "2026-05-05T09:42:31.364Z",
+        "total": 594.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 25,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:41.601Z",
+        "total": 609.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 40,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:52.859Z",
+        "total": 621.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 52,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:42:55.493Z",
+        "total": 629.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 60,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:02.876Z",
+        "total": 641.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 72,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:05.378Z",
+        "total": 649.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 80,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:13.826Z",
+        "total": 661.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 92,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:16.812Z",
+        "total": 669.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 0,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:43:53.397Z",
+        "total": 679.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 10,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:36.151Z",
+        "total": 685.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 16,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:44:39.696Z",
+        "total": 693,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 23.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:02.038Z",
+        "total": 703,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 33.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:11.749Z",
+        "total": 709,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 39.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:16.363Z",
+        "total": 716.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 47,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:21.836Z",
+        "total": 721.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 52,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:28.876Z",
+        "total": 731.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 62,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:33.725Z",
+        "total": 737.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 68,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:37.022Z",
+        "total": 745,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 75.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:45.932Z",
+        "total": 755,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 85.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:54.218Z",
+        "total": 761,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 91.5,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:45:57.667Z",
+        "total": 768.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 99,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:46:12.349Z",
+        "total": 769.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 100,
+          "D8": 90
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:48:15.916Z",
+        "total": 779.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 82,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 100,
+          "D8": 100
+        },
+        "trigger": "user"
+      },
+      {
+        "ts": "2026-05-05T09:50:58.884Z",
+        "total": 794.5,
+        "dimScores": {
+          "D1": 100,
+          "D2": 100,
+          "D3": 97,
+          "D4": 100,
+          "D5": 97.5,
+          "D6": 100,
+          "D7": 100,
+          "D8": 100
+        },
+        "trigger": "r9_proof_one"
+      }
+    ]
+  }
+}
