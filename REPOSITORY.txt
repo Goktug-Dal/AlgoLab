@@ -1,1 +1,2 @@
 https://github.com/Goktug-Dal/AlgoLab
+https://algo-lab-ten.vercel.app/
